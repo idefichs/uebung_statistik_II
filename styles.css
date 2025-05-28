@@ -1,10 +1,11 @@
 /* css styles */
 /* Beispiel für die Navbar-Hintergrund ersetzen */
 .navbar {
+  background-color: #F2CCD4; /* gewünschte Farbe links */
   background-image: url("images/banner_2.png");
-  background-size: cover;    /* Bild soll die ganze Fläche füllen */
+  background-size: auto 100%;    /* Bild soll die ganze Fläche füllen */
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: right;
   height: 120px;             /* Passe Höhe an deine Bannergröße an */
 }
 
