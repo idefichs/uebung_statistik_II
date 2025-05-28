@@ -6,7 +6,6 @@
   background-size: auto 100%;    /* Bild soll die ganze Fläche füllen */
   background-repeat: no-repeat;
   background-position: right;
-  height: 120px;             /* Passe Höhe an deine Bannergröße an */
 }
 
 /* Optional: Schriftfarbe in der Navbar anpassen */
