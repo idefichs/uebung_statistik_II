@@ -3,7 +3,6 @@
 .navbar {
   background-color: #F2CCD4; /* gewünschte Farbe links */
   background-image: url("images/banner_2.png");
-  background-size: auto 100%;    /* Bild soll die ganze Fläche füllen */
   background-repeat: no-repeat;
   background-position: right;
 }
