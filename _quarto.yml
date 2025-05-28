@@ -11,6 +11,7 @@ website:
 
 format:
   html:
+    lang: de
     theme:
       - cosmo
       - brand
