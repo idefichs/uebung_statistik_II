@@ -2,10 +2,6 @@
 title: "Übung Statistik II"
 ---
 
-This is a Quarto website.
+Willkommen zur Übung zur Vorlesung Statistik II
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
-
-```{r}
-1 + 1
-```
+In Kürze findet sich hier ein Übersicht über die behandelten Themen.
