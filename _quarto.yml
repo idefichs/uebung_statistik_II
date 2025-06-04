@@ -37,7 +37,7 @@ format:
     bibliography: literature.bib
     csl: apa.csl
     linkcolor: "#D22E4C"
-    css: styles.scss
+    css: styles.css
 
 editor: visual
 

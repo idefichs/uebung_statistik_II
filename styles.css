@@ -256,22 +256,6 @@ nav#TOC .nav-link:hover{
 }
 
 
-
-$background-dark: #2a1e22;
-$toc-bg-dark: #2a1e22;
-
-body[data-bs-theme="dark"] {
-  background-color: $background-dark !important;
-
-  #quarto-content {
-    background-color: $background-dark !important;
-  }
-
-  nav#TOC {
-    background-color: $toc-bg-dark !important;
-  }
-}
-
 /* Macht R-Konsolenausgabe blockfüllend */
 .cell-output-display, .cell-output {
   width: 100% !important;
