@@ -1,0 +1,7 @@
+---
+title: "Übung zu Statistik II - Sitzung 1"
+---
+
+Das kommentierte R-Skript ist auf GRIPS zu finden.
+
+Die Inhalte werden hier in Kürze nachgeliefert.

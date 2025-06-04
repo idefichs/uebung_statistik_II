@@ -18,28 +18,28 @@ h1 {
   font-size: 26px;
   font-weight: bold;
   color: #D22E4C;
-  margin-top: 30px;
+  margin-top: 40px;
   margin-bottom: 20px;
 }
 
 h2 {
   font-size: 22px;
   font-weight: bold;
-  margin-top: 30px;
+  margin-top: 40px;
   margin-bottom: 20px;
 }
 
 h3 {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
-  margin-top: 25px;
+  margin-top: 30px;
   margin-bottom: 20px;
 }
 
 h4 {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
-  margin-top: 15px;
+  margin-top: 20px;
   margin-bottom: 10px;
 }
 
@@ -196,7 +196,7 @@ li {
 nav#TOC {
   border-left: 2px solid  #D22E4C;
   margin-left: 4rem;
-  margin-right:1rem;
+  margin-right: 1rem;
   padding-left: 1rem; /* Hier mehr Abstand zwischen Linie und Inhalt */
 }
 
@@ -240,11 +240,11 @@ nav#TOC .nav-link:hover{
   body .page-columns {
     grid-template-columns:
       [screen-start] 1.5em 
-      [screen-start-inset] 5fr 
+      [screen-start-inset] 4.5fr 
       [page-start page-start-inset] 35px 
       [body-start-outset] 35px 
       [body-start] 1.5em 
-      [body-content-start] minmax(500px, calc(850px - 3em)) 
+      [body-content-start] minmax(600px, calc(1000px - 3em)) 
       [body-content-end] 1.5em 
       [body-end] 35px 
       [body-end-outset] minmax(100px, 200px)  /* ← Breiter */
@@ -257,28 +257,54 @@ nav#TOC .nav-link:hover{
 
 
 
+$background-dark: #2a1e22;
+$toc-bg-dark: #2a1e22;
 
-html.dark body {
-    background-color: green; /* dunkles Grau/Schwarz */
+body[data-bs-theme="dark"] {
+  background-color: $background-dark !important;
+
+  #quarto-content {
+    background-color: $background-dark !important;
   }
 
-html.dark #quarto-content {
-    background-color: #1f1a1b;
+  nav#TOC {
+    background-color: $toc-bg-dark !important;
   }
+}
 
-html.dark #quarto-margin-sidebar {
-    background-color: #221f1f;
-  }
+/* Macht R-Konsolenausgabe blockfüllend */
+.cell-output-display, .cell-output {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
 
-html.dark nav#TOC {
-    background-color: #2a1e22;
-  }
+/* Entfernt Beschränkung der inneren <pre> Box */
+.cell-output pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
 
-html.dark nav#TOC .nav-link.active {
-    background-color: #262223;
-  }
+/* Falls du Bootstrap-Klassen verwendest */
+div.output,
+div.cell-output {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
 
 
 
-
-
+/* Ändert die Linkfarbe beim Hovern */
+a:hover {
+  color: #D22E4C; /* beliebige Farbe, z.B. ein kräftiges Blau */
+  font-weight: bold;
+  text-decoration: underline;
+}

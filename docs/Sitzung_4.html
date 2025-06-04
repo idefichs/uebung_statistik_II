@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Jonas Hauck, Laura Simböck">
 
-<title>Sitzung 4 – Übung Statistik II</title>
+<title>Übung zu Statistik II - Sitzung 4 – Übung Statistik II</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,7 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -31,6 +84,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./images/230401_eds_Logo_farbe.ico" rel="icon">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -39,7 +93,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ddd961a2510921635943dfbbd19534c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-72f60fce90fc2228db3dc2c67cab11b2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.scss">
 </head>
 
 <body class="nav-fixed">
@@ -79,7 +133,10 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a href="https://www.uni-regensburg.de/humanwissenschaften/educational-data-science/startseite/index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/230401_eds_Logo_farbe.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="https://www.uni-regensburg.de/humanwissenschaften/educational-data-science/startseite/index.html">
     <span class="navbar-title">Übung Statistik II</span>
     </a>
   </div>
@@ -88,10 +145,25 @@ ul.task-list li input[type="checkbox"] {
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-skript" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Skript</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-skript">    
+        <li>
+    <a class="dropdown-item" href="./Sitzung_1.html">
+ <span class="dropdown-text">Sitzung 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Sitzung_4.html">
+ <span class="dropdown-text">Sitzung 4</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Home</span></a>
+    <a class="nav-link" href="./literatur.html"> 
+<span class="menu-text">Literatur</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./about.html"> 
@@ -108,27 +180,43 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Inhalte</h2>
+   
+  <ul>
+  <li><a href="#forschungsfragen" id="toc-forschungsfragen" class="nav-link active" data-scroll-target="#forschungsfragen">1. Forschungsfragen</a></li>
+  <li><a href="#auswahl-geeigneter-statistischer-analyseverfahren" id="toc-auswahl-geeigneter-statistischer-analyseverfahren" class="nav-link" data-scroll-target="#auswahl-geeigneter-statistischer-analyseverfahren">2. Auswahl geeigneter statistischer Analyseverfahren</a></li>
+  <li><a href="#vorbereitung-und-durchführung-der-statistischen-verfahren" id="toc-vorbereitung-und-durchführung-der-statistischen-verfahren" class="nav-link" data-scroll-target="#vorbereitung-und-durchführung-der-statistischen-verfahren">3. Vorbereitung und Durchführung der statistischen Verfahren</a>
+  <ul class="collapse">
+  <li><a href="#datensatz-laden" id="toc-datensatz-laden" class="nav-link" data-scroll-target="#datensatz-laden">3.1 Datensatz laden</a></li>
+  <li><a href="#überblick-über-den-datensatz" id="toc-überblick-über-den-datensatz" class="nav-link" data-scroll-target="#überblick-über-den-datensatz">3.2 Überblick über den Datensatz</a></li>
+  <li><a href="#voraussetzungen-prüfen" id="toc-voraussetzungen-prüfen" class="nav-link" data-scroll-target="#voraussetzungen-prüfen">3.3 Voraussetzungen prüfen</a></li>
+  <li><a href="#aufstellen-der-modelle" id="toc-aufstellen-der-modelle" class="nav-link" data-scroll-target="#aufstellen-der-modelle">3.4. Aufstellen der Modelle</a></li>
+  <li><a href="#prüfung-der-restlichen-voraussetzungen" id="toc-prüfung-der-restlichen-voraussetzungen" class="nav-link" data-scroll-target="#prüfung-der-restlichen-voraussetzungen">3.5. Prüfung der restlichen Voraussetzungen</a></li>
+  </ul></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">4. Interpretation</a>
+  <ul class="collapse">
+  <li><a href="#forschungsfrage-1" id="toc-forschungsfrage-1" class="nav-link" data-scroll-target="#forschungsfrage-1">4.1 Forschungsfrage 1</a></li>
+  <li><a href="#forschugnsfrage-2" id="toc-forschugnsfrage-2" class="nav-link" data-scroll-target="#forschugnsfrage-2">4.2 Forschugnsfrage 2</a></li>
+  <li><a href="#forschugnsfrage-3" id="toc-forschugnsfrage-3" class="nav-link" data-scroll-target="#forschugnsfrage-3">4.3 Forschugnsfrage 3</a></li>
+  </ul></li>
+  <li><a href="#literatur" id="toc-literatur" class="nav-link" data-scroll-target="#literatur">Literatur</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Sitzung 4</h1>
+<h1 class="title">Übung zu Statistik II - Sitzung 4</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Autor:in</div>
-    <div class="quarto-title-meta-contents">
-             <p>Jonas Hauck, Laura Simböck </p>
-          </div>
-  </div>
     
   
     
@@ -139,11 +227,969 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>** Hallo Welt**</p>
+<p>In der heutigen Sitzung beschäftigen wir uns mit einem Datensatz, der in Anlehnung an <span class="citation" data-cites="lueke2018attitudes">(<a href="#ref-lueke2018attitudes" role="doc-biblioref">Lüke &amp; Grosche, 2018</a>)</span> simuliert wurde. Dabei handelt es sich lediglich um eine Simulation zu Übungszwecken, die <strong>nicht</strong> die Originaldaten umfasst bzw. abbildet.</p>
+<p>Im Artikel wird untersucht, welche Einstellungen Studienteilnehmende gegenüber Inklusion haben und inwiefern diese durch verschiedene Einflussfaktoren bestimmt werden. Besonderes Augenmerk liegt auf dem Einfluss der wahrgenommenen Haltung der Organisation, die die Befragung durchführt. In zwei Experimenten wurde gezeigt, dass Einstellungen zur inklusiven Bildung nicht stabil sind, sondern stark vom sozialen Kontext beeinflusst werden.</p>
+<section id="forschungsfragen" class="level2">
+<h2 class="anchored" data-anchor-id="forschungsfragen">1. Forschungsfragen</h2>
+<p>Wir wollen in der heutigen Sitzung die folgenden drei Forschungsfragen analysieren:</p>
+<ol type="1">
+<li><p>Inwiefern verändert sich die Einstellung gegenüber Inklusion bezogen auf Bildungs-Outcomes (ati_edu) mit dem Alter?</p></li>
+<li><p>Verändert sich die Einstellung gegenüber Inklusion bezogen auf Bildungs-Outcomes (ati_edu) mit dem Alter und abhängig von der Einstellung gegenüber Inklusion bezogen auf soziale Outcomes (ati_soc)?</p></li>
+<li><p>Verändert sich die Einstellung gegenüber Inklusion bezogen auf Bildungs-Outcomes mit dem Alter in Abhängigkeit vom Geschlecht?</p></li>
+</ol>
+</section>
+<section id="auswahl-geeigneter-statistischer-analyseverfahren" class="level2">
+<h2 class="anchored" data-anchor-id="auswahl-geeigneter-statistischer-analyseverfahren">2. Auswahl geeigneter statistischer Analyseverfahren</h2>
+<ol type="1">
+<li><p>Vorhersage <em>einer</em> metrische AV (ati_edu) durch <em>eine</em> metrische UV (age):<br>
+<strong>➔ einfache lineare Regression</strong></p></li>
+<li><p>Vorhersage <em>einer</em> metrische AV (ati_edu) durch <em>mehr als eine</em> metrische UV (hier: age, ati_soc):<br>
+<strong>➔ multiple lineare Regression</strong></p></li>
+<li><p>Vorhersage <em>einer</em> metrische AV (ati_edu) durch <em>mind. eine</em> metrische UV (hier: age) und <em>mind. eine</em> binär kodierte UV (hier: sex):<br>
+<strong>➔ multiple lineare Regression mit Dummycodierung</strong></p></li>
+</ol>
+</section>
+<section id="vorbereitung-und-durchführung-der-statistischen-verfahren" class="level2">
+<h2 class="anchored" data-anchor-id="vorbereitung-und-durchführung-der-statistischen-verfahren">3. Vorbereitung und Durchführung der statistischen Verfahren</h2>
+<section id="datensatz-laden" class="level3">
+<h3 class="anchored" data-anchor-id="datensatz-laden">3.1 Datensatz laden</h3>
+<section id="variante-1" class="level4">
+<h4 class="anchored" data-anchor-id="variante-1">Variante 1</h4>
+<p>Den Datensatz über die Angabe des vollständigen Dateipfades einlesen.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Daten einlesen</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">"Hier/kompletten/Pfad/zur/Datei/data_inklusion.csv"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="variante-2" class="level4">
+<h4 class="anchored" data-anchor-id="variante-2">Variante 2</h4>
+<p>Ein geeignetes Arbeitsverzeichnis setzen und dort den Datensatz abspeichern. Dann benötigt der Einlese-Befehl nur noch den Dateinamen.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Arbeitsverzeichnis setzen</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"Hier/kompletten/Pfad/zur/Datei"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># optional: Überprüfung des aktuellen Arbeitsverzeichnisses</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Daten einlesen</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">"data_inklusion.csv"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="überblick-über-den-datensatz" class="level3">
+<h3 class="anchored" data-anchor-id="überblick-über-den-datensatz">3.2 Überblick über den Datensatz</h3>
+<p>Einen guten Überblick über <strong>Inhalt</strong>, <strong>Struktur</strong> und erste <strong>deskriptive Statistiken</strong> des Datensatzes erhält man z. B. mit den beiden Befehlen <code>str()</code> und <code>summary()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   231 obs. of  11 variables:
+ $ group    : chr  "Group A" "Group A" "Group A" "Group A" ...
+ $ sex      : int  0 1 1 0 1 1 1 0 0 1 ...
+ $ children : int  0 0 0 0 0 1 0 0 0 0 ...
+ $ age      : int  27 39 21 42 36 27 30 48 27 39 ...
+ $ contact  : int  1 1 1 1 1 1 1 0 0 1 ...
+ $ edu_prof : int  0 0 0 1 1 0 1 1 0 1 ...
+ $ education: int  6 8 7 5 9 6 8 8 6 11 ...
+ $ politics : int  5 5 3 2 2 3 6 3 6 6 ...
+ $ att_org  : int  7 5 6 6 4 2 6 4 4 6 ...
+ $ ati_edu  : num  22.9 18.8 26.4 19 24.7 ...
+ $ ati_soc  : num  9.32 11.46 18.14 8.71 11.77 ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    group                sex           children           age       
+ Length:231         Min.   :0.000   Min.   :0.0000   Min.   :17.00  
+ Class :character   1st Qu.:0.000   1st Qu.:0.0000   1st Qu.:27.00  
+ Mode  :character   Median :0.000   Median :0.0000   Median :35.00  
+                    Mean   :0.303   Mean   :0.1169   Mean   :34.34  
+                    3rd Qu.:1.000   3rd Qu.:0.0000   3rd Qu.:40.00  
+                    Max.   :1.000   Max.   :1.0000   Max.   :62.00  
+    contact          edu_prof        education         politics    
+ Min.   :0.0000   Min.   :0.0000   Min.   : 2.000   Min.   :0.000  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.: 6.000   1st Qu.:3.000  
+ Median :1.0000   Median :0.0000   Median : 7.000   Median :4.000  
+ Mean   :0.7273   Mean   :0.3766   Mean   : 7.143   Mean   :3.892  
+ 3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.: 8.000   3rd Qu.:5.000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :12.000   Max.   :8.000  
+    att_org         ati_edu         ati_soc      
+ Min.   :1.000   Min.   :13.24   Min.   : 1.000  
+ 1st Qu.:3.000   1st Qu.:19.39   1st Qu.: 9.563  
+ Median :5.000   Median :21.96   Median :11.865  
+ Mean   :4.312   Mean   :21.91   Mean   :11.768  
+ 3rd Qu.:6.000   3rd Qu.:24.25   3rd Qu.:13.862  
+ Max.   :7.000   Max.   :31.74   Max.   :21.290  </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># weitere nützliche Befehle</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(df)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(df)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(df)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(df) <span class="co"># deskriptive Statistiken: describe() aus dem package psych enthält mehr/andere Informationen als summary().</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">describeBy</span>(df, df<span class="sc">$</span>group) <span class="co"># deskriptive Statistiken: describeBy() aus dem package psych gibt Statistiken gesplittet nach Gruppen aus.</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Wir wissen nun, <strong>welche</strong> Variablen im Datensatz enthalten sind, aber kennen die Kodierungen nicht. Deshalb benötigen wir noch mehr Informationen aus dem Artikel. Diese finden sich z. B. auf S. 44. Damit können wir eine Art codebook erstellen:</p>
+<section id="codebook" class="level4">
+<h4 class="anchored" data-anchor-id="codebook"><strong>codebook</strong></h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 51%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Beschreibung</th>
+<th>Kodierung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>group</code></td>
+<td>durchführende Organisation</td>
+<td>A, B, C, D (siehe Artikel)</td>
+</tr>
+<tr class="even">
+<td><code>sex</code></td>
+<td>Geschlecht</td>
+<td>0 = weiblich, 1 = männlich</td>
+</tr>
+<tr class="odd">
+<td><code>children</code></td>
+<td>Kind(er)?</td>
+<td>0 = nein, 1 = ja</td>
+</tr>
+<tr class="even">
+<td><code>age</code></td>
+<td>Alter</td>
+<td>metrisch: Alter in Jahren</td>
+</tr>
+<tr class="odd">
+<td><code>contact</code></td>
+<td>Kontakt zu Personen mit Behinderung?</td>
+<td>0 = nein, 1 = ja</td>
+</tr>
+<tr class="even">
+<td><code>edu_prof</code></td>
+<td>Beruf im Bildungsbereich?</td>
+<td>0 = nein, 1 = ja</td>
+</tr>
+<tr class="odd">
+<td><code>education</code></td>
+<td>Bildungsniveau</td>
+<td>metrisch: Anzahl der Schuljahre</td>
+</tr>
+<tr class="even">
+<td><code>politics</code></td>
+<td>Politische Einstellung</td>
+<td>1 = links, 10 = rechts</td>
+</tr>
+<tr class="odd">
+<td><code>att_org</code></td>
+<td>Wahrgenommene Einstellung der durchführenden Organiation</td>
+<td>1 = absolut gegen Inklusion bis 7 = absolut für Inklusion</td>
+</tr>
+<tr class="even">
+<td><code>ati_edu</code></td>
+<td>Einstellung gegenüber Inklusion (Bildungsoutcomes)</td>
+<td>0, …, 35: Summe über 7 Items von 0 = Stimme nicht zu. bis 5 = Stimme zu.</td>
+</tr>
+<tr class="odd">
+<td><code>ati_soc</code></td>
+<td>Einstellung gegenüber Inklusion (soziale Outcomes)</td>
+<td>0, …, 25: Summe über 5 Items von 0 = Stimme nicht zu. bis 5 = Stimme zu.</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="voraussetzungen-prüfen" class="level3">
+<h3 class="anchored" data-anchor-id="voraussetzungen-prüfen">3.3 Voraussetzungen prüfen</h3>
+<ol type="1">
+<li>Linearer Zusammenhang zwischen AV und allen (nicht binär kodierten) UV(s)</li>
+<li>Normalverteilung der Residuen</li>
+<li>Homoskedastizität der Residuen</li>
+<li>bei multiplen Regressionen: UVs auf Multikollinearität überprüfen</li>
+</ol>
+<p>Die Voraussetzungen 1 &amp; 4 können überprüft werden, bevor die Modelle geschätzt werden. Für 2 &amp; 3 benötigen wir die Residuen, die wir aber erst im Zuge der Schätzung der Modelle erhalten.</p>
+<section id="überprüfung-der-linearität" class="level4">
+<h4 class="anchored" data-anchor-id="überprüfung-der-linearität">3.3.1 Überprüfung der Linearität</h4>
+<p>Die Linearität kann <strong>visuell</strong>, z. B. mit Hilfe eines Streudiagramms (scatterplot) überprüft werden. Eine feststehendes Kriterium, ab wann ein Zusammenhang als linear gewertet wird, gibt es allerdings nicht.</p>
+<p><strong>Forschungsfrage 1:</strong></p>
+<div class="columns">
+<div class="column" style="width:47.5%;">
+<p>base R</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># zur Erinnerung: ~ = "in Abhängigkeit von"</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># für Plots bedeutet das: y-Achse ~ x-Achse</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ati_edu <span class="sc">~</span> age, <span class="at">data =</span> df,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"ATI nach Alter"</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Alter"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"ATI (Bildungs-Outcomes)"</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fu">min</span>(df<span class="sc">$</span>ati_edu)<span class="sc">-</span><span class="dv">2</span>,<span class="dv">32</span>),</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">19</span>,         <span class="co"># volle Punkte</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"#D22E4C"</span>) <span class="co"># Farbe der Punkte</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sitzung_4_files/figure-html/scatter-base-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:5%;">
+<!-- empty column to create gap -->
+</div><div class="column" style="width:47.5%;">
+<p>ggplot</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> ati_edu)) <span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span>  <span class="st">"#D22E4C"</span>) <span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"ATI nach Alter"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Alter"</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"ATI (Bildungs-Outcomes)"</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sitzung_4_files/figure-html/scatter-ggplot-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr style="border: 1px solid #D22E4C;">
+<p><strong>Forschungsfrage 2:</strong></p>
+<div class="columns">
+<div class="column" style="width:47.5%;">
+<p>base R</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># zur Erinnerung: ~ = "in Abhängigkeit von"</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># für Plots bedeutet das: y-Achse ~ x-Achse</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ati_edu <span class="sc">~</span> ati_soc, <span class="at">data =</span> df,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"ATI_EDU in Abhängigkeit von ATI_SOC"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"ATI (soziale Outcomes)"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"ATI (Bildungs-Outcomes)"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fu">min</span>(df<span class="sc">$</span>ati_edu)<span class="sc">-</span><span class="dv">2</span>,<span class="dv">32</span>),</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">19</span>,         <span class="co"># volle Punkte</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"#D22E4C"</span>) <span class="co"># Farbe der Punkte</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sitzung_4_files/figure-html/scatter-base-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:5%;">
+<!-- empty column to create gap -->
+</div><div class="column" style="width:47.5%;">
+<p>ggplot</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df, <span class="fu">aes</span>(<span class="at">x =</span> ati_soc, <span class="at">y =</span> ati_edu)) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span>  <span class="st">"#D22E4C"</span>) <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"ATI_EDU in Abhängigkeit von ATI_SOC"</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"ATI (soziale Outcomes)"</span>,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"ATI (Bildungs-Outcomes)"</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sitzung_4_files/figure-html/scatter-ggplot-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Fazit:</strong><br>
+Für beide Forschungsfragen nehmen wir nach Inspektion der Streudiagramme lineare Zusammenhänge an.</p>
+</section>
+<section id="überprüfung-auf-multikollinearität" class="level4">
+<h4 class="anchored" data-anchor-id="überprüfung-auf-multikollinearität">3.3.2 Überprüfung auf Multikollinearität</h4>
+<p>Multikollinearität muss nur für Forschungsfrage 2 überprüft werden, weil hier mindestens zwei metrische Prädiktoren (UVs) ins Modell eingehen. Die multiple Regressionsanalyse liefert nur dann verlässliche Ergebnisse, wenn die Prädiktoren nicht zu hoch miteinander korrelieren. Ein Beispiel für hohe Kollinearität wäre etwa die größe einer Wohnung und die Anzahl der Zimmer. In diesem Fall kann man eine UV bereits durch eine (oder auch mehrere) weitere UV(s) vorhersagen, was zu Problemen in der Schätzgenauigkeit und Interpretierbarkeit des Modells führen kann.</p>
+<p>Multikollinearität kann auf zwei Arten überprüft werden:</p>
+<p><strong>visuell</strong> durch z. B. ein Streudiagramm der beiden Prädiktoren</p>
+<div class="columns">
+<div class="column" style="width:47.5%;">
+<p>base R</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># zur Erinnerung: ~ = "in Abhängigkeit von"</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Für die Überprüfung der Kollinearität ist die Reihenfolge der UVs egal</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(age <span class="sc">~</span> ati_soc, <span class="at">data =</span> df,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Alter in Abhängigkeit von ATI_SOC"</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"ATI (soziale Outcomes)"</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Alter"</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fu">min</span>(df<span class="sc">$</span>age)<span class="sc">-</span><span class="dv">2</span>, <span class="fu">max</span>(df<span class="sc">$</span>age)<span class="sc">+</span><span class="dv">2</span>),</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">19</span>,         <span class="co"># volle Punkte</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"#D22E4C"</span>) <span class="co"># Farbe der Punkte</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sitzung_4_files/figure-html/scatter-base-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:5%;">
+<!-- empty column to create gap -->
+</div><div class="column" style="width:47.5%;">
+<p>ggplot</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df, <span class="fu">aes</span>(<span class="at">x =</span> ati_soc, <span class="at">y =</span> age)) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span>  <span class="st">"#D22E4C"</span>) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Alter in Abhängigkeit von ATI_SOC"</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"ATI (soziale Outcomes)"</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Alter"</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sitzung_4_files/figure-html/scatter-ggplot-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>statistisch</strong> durch die Berechnung der Korrelation:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(df<span class="sc">$</span>age, df<span class="sc">$</span>ati_soc)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.6059036</code></pre>
+</div>
+</div>
+<p>Ab einer Pearson-Korrelation von ca. .70 sollte man noch einmal genau prüfen, ob Kollinearität vorliegt (z. B. auch mittels VIF [Variance Inflation Factor]) und ob beide Variablen im Regressionsmodell benötigt werden. Auch hier gilt: Faustregel, kein absoluter Schwellenwert!</p>
+<p>Bei mehr als zwei metrischen UVs ist eine Korrelationsmatrix sinnvoll. Da Multikollinearität aber auch dann vorliegen kann, wenn sich ein Prädiktor durch eine (lineare) Kombination anderer Prädiktoren vorhersagen lässt, reicht eine Korrelationsmatrix nicht immer aus. In diesem Fall ist die Verwendung des VIF empfohlen.</p>
+<p><strong>Fazit:</strong><br>
+In unserem Fall korrelieren die beiden Prädiktoren zwar durchaus hoch, aber noch in einem “vertretbaren Rahmen”, d.&nbsp;h. sie könnten im Modell möglicherweise beide substanziell zur Erklärung von Varianz in der AV beitragen.</p>
+</section>
+</section>
+<section id="aufstellen-der-modelle" class="level3">
+<h3 class="anchored" data-anchor-id="aufstellen-der-modelle">3.4. Aufstellen der Modelle</h3>
+<div class="columns">
+<div class="column" style="width:30%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># zu Forschungsfrage 1</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(df<span class="sc">$</span>ati_edu <span class="sc">~</span> df<span class="sc">$</span>age)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2D-Plot mit base R</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>ati_edu <span class="sc">~</span> df<span class="sc">$</span>age,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Alter"</span>,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"ATI (Bildungs-Outcomes"</span>,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"#D22E4C"</span>,</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">16</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Regressionsgerade einzeichnen</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod1, <span class="at">col =</span> <span class="st">"#F2CCD4"</span>, <span class="at">lwd =</span> <span class="dv">4</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sitzung_4_files/figure-html/model-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:32%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># zu Forschungsfrage 2</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(ati_edu <span class="sc">~</span> age <span class="sc">+</span> ati_soc, <span class="at">data =</span> df)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Je mehr Prädiktoren, desto schwieriger wird die Visualisierung des Modells.</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Mehr als drei Dimensionen (2 Prädiktoren + 1 Kriterium) kann man sich nicht mehr vorstellen.</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 3D Plot</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scatterplot3d)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>s3d <span class="ot">&lt;-</span> <span class="fu">scatterplot3d</span>(df<span class="sc">$</span>age, df<span class="sc">$</span>ati_soc, df<span class="sc">$</span>ati_edu, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">color =</span> <span class="st">"#D22E4C"</span>,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>                     <span class="at">xlab =</span> <span class="st">"Alter"</span>, <span class="at">ylab =</span> <span class="st">"ATI (soziale Outcomes)"</span>, <span class="at">zlab =</span> <span class="st">"ATI (Bildungs-Outcomes"</span>)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Regressionsebene einzeichnen</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>s3d<span class="sc">$</span><span class="fu">plane3d</span>(mod2)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sitzung_4_files/figure-html/model-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:32%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># zu Forschungsfrage 3</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(ati_edu <span class="sc">~</span> age <span class="sc">+</span> sex, <span class="at">data =</span> df)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="prüfung-der-restlichen-voraussetzungen" class="level3">
+<h3 class="anchored" data-anchor-id="prüfung-der-restlichen-voraussetzungen">3.5. Prüfung der restlichen Voraussetzungen</h3>
+<p>Nachdem die Modelle geschätzt sind, können nun auch die restlichen Voraussetzungen überprüft werden, d.&nbsp;h. insbesondere die <strong>Normalverteilung der Residuen</strong> und die <strong>Homoskedastizität der Residuen</strong>.</p>
+<p>Hat man die Modelle geschätzt, kann man in R leicht auf die Residuen bzw. geschätzten (auch: vorhergesagten, gefitteten) Werte zugreifen:</p>
+<ul>
+<li><code>resid(model)</code> bzw <code>residuals(model)</code> liefert die Residuen des jeweiligen Modells.</li>
+<li><code>fitted(model)</code> liefert die vorhergesagten Werte, also diejenigen, die auf der Regressionsgerade liegen.</li>
+</ul>
+<p>Zum Beispiel für unser Modell 1:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">resid</span>(mod1)[<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>] <span class="co"># Die Residuen für die ersten 12 Fälle im Datensatz</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         1          2          3          4          5          6          7 
+-0.4976589 -2.1268388  1.8027553 -1.3604928  3.1015034  2.9218840  2.2190329 
+         8          9         10         11         12 
+ 2.6466850 -0.2014620  0.5806697 -1.5432726 -2.9652863 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fitted</span>(mod1)[<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>] <span class="co"># Die geschätzten Werte der AV (hier: ati_edu) für die ersten 12 Fälle im Datensatz</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       1        2        3        4        5        6        7        8 
+23.40243 20.96350 24.62189 20.35377 21.57323 23.40243 22.79269 19.13431 
+       9       10       11       12 
+23.40243 20.96350 24.82513 25.02837 </code></pre>
+</div>
+</div>
+<section id="normalverteilung-der-residuen" class="level4">
+<h4 class="anchored" data-anchor-id="normalverteilung-der-residuen">3.5.1 Normalverteilung der Residuen</h4>
+<p>Damit wir nicht immer wieder die Funktion <code>resid()</code>schreiben müssen, speichern wir die Residuen zunächst jeweils in einem neuen Objekt:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>resid1 <span class="ot">&lt;-</span> <span class="fu">resid</span>(mod1)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>resid2 <span class="ot">&lt;-</span> <span class="fu">resid</span>(mod2)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>resid3 <span class="ot">&lt;-</span> <span class="fu">resid</span>(mod3)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Ob die Residuen normalverteilt sind, kann wieder auf zwei Arten überprüft werden: visuell oder mit Hilfe eines statistischen Tests.</p>
+<p><strong>visuell</strong></p>
+<p><img src="images/not_normal.png" class="float-right img-fluid" width="300"> <em>Quelle: <a href="https://twitter.com/allison_horst">Artwork by allison_horst</a></em></p>
+<p>Geeignete Visualisierungen sind u. a. Histogramme oder Q-Q-Plots.</p>
+<p><strong>Forschungsfrage 1:</strong></p>
+<div class="columns">
+<div class="column" style="width:47.5%;">
+<p>base R</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(resid1, <span class="at">col =</span> <span class="st">"#D22E4C"</span>, <span class="at">breaks =</span> <span class="dv">24</span>,</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="dv">10</span>),</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">25</span>),</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Histogramm der Residuen von Modell 1"</span>,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Residuen"</span>,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Häufigkeit"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sitzung_4_files/figure-html/nd-residuals-1-base-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(resid1, <span class="at">col =</span> <span class="st">"#D22E4C"</span>,</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">main =</span> <span class="st">"Q-Q-Plot der Residuen von Modell 1"</span>,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"Theoretische Quantile"</span>,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="st">"Empirische Quantile"</span>,</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">16</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(resid1)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sitzung_4_files/figure-html/nd-residuals-1-base-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:5%;">
+<!-- empty column to create gap -->
+</div><div class="column" style="width:47.5%;">
+<p>ggplot</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(resid1), <span class="fu">aes</span>(<span class="at">x =</span> resid1)) <span class="sc">+</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"#D22E4C"</span>, <span class="at">bins =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Histogramm der Residuen von Modell 1"</span>,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Residuen"</span>,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Häufigkeit"</span>) <span class="sc">+</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sitzung_4_files/figure-html/nd-residuals-1-ggplot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(resid1), <span class="fu">aes</span>(<span class="at">sample =</span> resid1)) <span class="sc">+</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_qq</span>(<span class="at">color =</span> <span class="st">"#D22E4C"</span>) <span class="sc">+</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Q-Q-Plot der Residuen von Modell 1"</span>,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Theoretische Quantile"</span>, <span class="at">y =</span> <span class="st">"Empirische Quantile"</span>) <span class="sc">+</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sitzung_4_files/figure-html/nd-residuals-1-ggplot-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr style="border: 1px solid #D22E4C;">
+<p>Mit analogem Code können nun die entsprechenden Plots für unsere Modelle 2 und 3 erzeugt werden.</p>
+<p><strong>Forschungsfrage 2:</strong></p>
+<div class="columns">
+<div class="column" style="width:47.5%;">
+<p>base R</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sitzung_4_files/figure-html/nd-residuals-2-base-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sitzung_4_files/figure-html/nd-residuals-2-base-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:5%;">
+<!-- empty column to create gap -->
+</div><div class="column" style="width:47.5%;">
+<p>ggplot</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sitzung_4_files/figure-html/nd-residuals-2-ggplot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sitzung_4_files/figure-html/nd-residuals-2-ggplot-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr style="border: 1px solid #D22E4C;">
+<p><strong>Forschungsfrage 3:</strong></p>
+<div class="columns">
+<div class="column" style="width:47.5%;">
+<p>base R</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sitzung_4_files/figure-html/nd-residuals-3-base-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sitzung_4_files/figure-html/nd-residuals-3-base-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:5%;">
+<!-- empty column to create gap -->
+</div><div class="column" style="width:47.5%;">
+<p>ggplot</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sitzung_4_files/figure-html/nd-residuals-3-ggplot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sitzung_4_files/figure-html/nd-residuals-3-ggplot-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Fazit:</strong><br>
+Für alle drei Modelle sind die Residuen annähernd normalverteilt. Bei Histogrammen ist immer zu beachten, dass die Argumente <code>bins</code> bzw. <code>breaks</code> das Aussehen der Verteilung beeinflussen. Daher sehen die Plots auch unterschiedlich aus, je nachdem ob base R oder ggplot verwendet wird. (Mit etwas mehr Code ist es aber auch möglich, gleiche Plots zu erzeugen.) Sind die Argumente ungünstig gewählt, lässt sich eine Normalverteilung u. U. nicht erkennen. Zum Beispiel ergibt sich für unser Modell 1 und unterschiedliche Werte für das Argument <code>bins</code>:</p>
+<div class="columns">
+<div class="column" style="width:47.5%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># bins = 10</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(resid1), <span class="fu">aes</span>(<span class="at">x =</span> resid1)) <span class="sc">+</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"#D22E4C"</span>, <span class="at">bins =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Histogramm der Residuen von Modell 1"</span>,</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Residuen"</span>,</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Häufigkeit"</span>) <span class="sc">+</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sitzung_4_files/figure-html/bins-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:5%;">
+<!-- empty column to create gap -->
+</div><div class="column" style="width:47.5%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># bins = 30</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(resid1), <span class="fu">aes</span>(<span class="at">x =</span> resid1)) <span class="sc">+</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"#D22E4C"</span>, <span class="at">bins =</span> <span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Histogramm der Residuen von Modell 1"</span>,</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Residuen"</span>,</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Häufigkeit"</span>) <span class="sc">+</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sitzung_4_files/figure-html/bins-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Q-Q-Plots</strong> sind dahingehend eine etwas <strong>verlässlichere Visualisierungsmöglichkeit</strong>. Die Punkte sollten hierbei möglichst auf der eingezeichneten Geraden liegen. An den beiden “Enden” der Geraden gibt es fast immer Abweichungen, weil in diesen Bereichen nur wenige Datenpunkte vorliegen, was die Quantilschätzungen unsicherer macht, sie besonders empfindlich gegenüber Ausreißern sind und sich Unterschiede zwischen der beobachteten und der theoretischen Verteilung vor allem in den Randbereichen deutlich bemerkbar machen.</p>
+<hr style="border: 1px solid;">
+<p><strong>statistisch:</strong> Geeignete statistische Tests sind u. a. der Shapiro-Wilk-Test oder der Kolmogorov-Smirnov-Test. Exemplarisch für unser Modell 1:</p>
+<div class="columns">
+<div class="column" style="width:47.5%;">
+<p>Shapiro-Wilk-Test</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(resid1)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  resid1
+W = 0.99269, p-value = 0.3117</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:5%;">
+<!-- empty column to create gap -->
+</div><div class="column" style="width:47.5%;">
+<p>Kolmogorov-Smirnov-Test</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(resid1, <span class="st">"pnorm"</span>, <span class="at">mean=</span><span class="fu">mean</span>(resid1), <span class="at">sd=</span><span class="fu">sd</span>(resid1))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Asymptotic one-sample Kolmogorov-Smirnov test
+
+data:  resid1
+D = 0.041448, p-value = 0.8223
+alternative hypothesis: two-sided</code></pre>
+</div>
+</div>
+</div>
+</div>
+<hr style="border: 1px solid;">
+<p>Während der Shapiro-Wilk-Test immer auf Normalverteilung testet, testet der Kolmogorov-Smirnov-Test grundsätzlich auf Verteilungen und benötigt nähere Angaben, auf welche Verteilung nun genau getestet werden soll. In unserem Fall ist das die Normalverteilung, die durch den Mittelwert und die Standardabweichung festgelegt ist. Deshalb werden diese beiden Parameter ebenfalls als Argumente übergeben.</p>
+<p>Beide Tests haben die Nullhypothese “Normalverteilung liegt vor”. Wird der Test signifikant, würde man also die Nullhypothese ablehnen. Wäre das der Fall, wäre die Voraussetzung der normalverteilten Residuen verletzt.</p>
+<p><strong>Fazit:</strong><br>
+In unserem Fall werden beide Tests nicht signifikant, wir gehen also von Normalverteilung aus. Grundsätzlich empfiehlt sich immer auch die visuelle Überprüfung, da beide Tests (unterschiedliche) Schwachstellen besitzen und in bestimmten Fällen (z. B. Ausreißer) die Normalverteilung zu schnell “ablehnen” und in anderen Fällen (z. B. zu geringe Power bei kleinen Stichproben) eine Abweichung der Normalverteilung möglicherweise nicht erkennen.</p>
+</section>
+<section id="homoskedaszität-der-residuen-überprüfen" class="level4">
+<h4 class="anchored" data-anchor-id="homoskedaszität-der-residuen-überprüfen">3.5.2 Homoskedaszität der Residuen überprüfen</h4>
+<p>Homoskedastizität kann ebenfalls gut <strong>visuell</strong> überprüft werden. Ein geeignetes Mittel ist der sog. Residual-vs-Fitted-Plot.<br>
+Bei <strong>Homoskedastizität</strong> sollte kein Muster erkennbar sein, d.&nbsp;h. die Punkte sollten zufällig um die Nulllinie streuen, ohne z. B. einem Trichter zu ähneln.</p>
+<p><strong>Forschungsfrage 1:</strong></p>
+<div class="columns">
+<div class="column" style="width:47.5%;">
+<p>base R</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">fitted</span>(mod1), resid1,</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"#D22E4C"</span>,</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">16</span>,</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Residuals vs Fitted – Modell 1"</span>,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Vorhergesagte Werte"</span>,</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Residuen"</span>)</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">lwd =</span> <span class="dv">3</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sitzung_4_files/figure-html/homoskedasticity-1-base-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:5%;">
+<!-- empty column to create gap -->
+</div><div class="column" style="width:47.5%;">
+<p>ggplot</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">fitted =</span> <span class="fu">fitted</span>(mod1), <span class="at">resid =</span> resid1),</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> fitted, <span class="at">y =</span> resid)) <span class="sc">+</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"#D22E4C"</span>) <span class="sc">+</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"solid"</span>) <span class="sc">+</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Residuals vs Fitted – Modell 1"</span>,</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Vorhergesagte Werte"</span>,</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Residuen"</span>) <span class="sc">+</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sitzung_4_files/figure-html/homoskedasticity-1-ggplot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr style="border: 1px solid #D22E4C;">
+<p>Mit analogem Code können nun die entsprechenden Plots für unsere Modelle 2 und 3 erzeugt werden.</p>
+<p><strong>Forschungsfrage 2:</strong></p>
+<div class="columns">
+<div class="column" style="width:47.5%;">
+<p>base R</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sitzung_4_files/figure-html/homoskedasticity-2-base-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:47.5%;">
+<p>ggplot</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sitzung_4_files/figure-html/homoskedasticity-2-ggplot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Forschungsfrage 3:</strong></p>
+<div class="columns">
+<div class="column" style="width:47.5%;">
+<p>base R</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sitzung_4_files/figure-html/homoskedasticity-3-base-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:47.5%;">
+<p>ggplot</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sitzung_4_files/figure-html/homoskedasticity-3-ggplot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Fazit:</strong><br>
+Die graphische Überprüfung deutet auf Homoskedastizität hin. Es sind keine auffälligen Muster zu erkennen.</p>
+<p>Da wir nun also alle notwendigen Voraussetzungen überprüft haben und diese jeweils für alle drei Modelle erfüllt sind, können wir diese nun auch sinnvollerweise interpretieren.</p>
+</section>
+</section>
+</section>
+<section id="interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation">4. Interpretation</h2>
+<p>Um die zur Interpretation nötigen Informationen (Parameterschätzungen, p-Werte, …) zu erhalten, nutzen wir die Funktion <code>summary()</code>.</p>
+<section id="forschungsfrage-1" class="level3">
+<h3 class="anchored" data-anchor-id="forschungsfrage-1">4.1 Forschungsfrage 1</h3>
+<p><strong>Frage:</strong><br>
+Inwiefern verändert sich die Einstellung gegenüber Inklusion bezogen auf Bildungs-Outcomes (ati_edu) mit dem Alter?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = df$ati_edu ~ df$age)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-8.0271 -2.1263 -0.0693  2.3967  7.9186 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 28.89000    0.71953   40.15   &lt;2e-16 ***
+df$age      -0.20324    0.02012  -10.10   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.053 on 229 degrees of freedom
+Multiple R-squared:  0.3082,    Adjusted R-squared:  0.3052 
+F-statistic:   102 on 1 and 229 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<hr style="border: 1px solid;">
+<p><br><br> <strong>geschätzte Regressionsgleichung:</strong><br>
+ati_edu = 28.89 − 0.203 ⋅ age</p>
+<p>Das hieße z. B. eine durchschnittliche Person im Alter von 50 Jahren hätte einen geschätzten ati_edu-Wert von<br>
+28.89 - 0.203 ⋅ 50 = 18.74</p>
+<p><strong>Interpretation:</strong></p>
+<ul>
+<li><p>Intercept (28.89):<br>
+Wenn das Alter 0 wäre (was inhaltlich hier keinen realistischen Sinn ergibt), wäre die vorhergesagte Einstellung gegenüber Inklusion 28.89 Punkte. In diesem Kontext ist der Achsenabschnitt also rein technisch/hypothetisch zu interpretieren.</p></li>
+<li><p>Alter (−0.20324):<br>
+Mit jedem weiteren Lebensjahr sinkt die Einstellung gegenüber Inklusion im Durchschnitt um 0.20 Punkte. Der negative Koeffizient weist darauf hin, dass ältere Personen tendenziell eine negativere Einstellung gegenüber Inklusion haben. Der Effekt ist signifikant.</p></li>
+<li><p>Modellgüte</p>
+<ul>
+<li>Varianzaufklärung (R² = 0.3082 / Adjusted R² = 0.3052):<br>
+Das Modell erklärt ca. <strong>30.8%</strong> der Varianz in der Einstellung gegenüber Inklusion. Für sozialwissenschaftliche Modelle ist das ein mittlerer Effekt.</li>
+<li>F-Test p-Wert &lt; 2.2e-16:<br>
+Das Gesamtmodell ist signifikant. Die Prädiktorvariable “Alter” trägt also statistisch signifikant zur Vorhersage bei.</li>
+</ul></li>
+</ul>
+</section>
+<section id="forschugnsfrage-2" class="level3">
+<h3 class="anchored" data-anchor-id="forschugnsfrage-2">4.2 Forschugnsfrage 2</h3>
+<p><strong>Frage:</strong><br>
+Verändert sich die Einstellung gegenüber Inklusion bezogen auf Bildungs-Outcomes (ati_edu) mit dem Alter und abhängig von der Einstellung gegenüber Inklusion bezogen auf soziale Outcomes (ati_soc)?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = ati_edu ~ age + ati_soc, data = df)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-8.1687 -2.0942 -0.1002  2.4357  7.8579 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 28.37385    1.56742  18.102  &lt; 2e-16 ***
+age         -0.19755    0.02534  -7.796 2.27e-13 ***
+ati_soc      0.02725    0.07347   0.371    0.711    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.059 on 228 degrees of freedom
+Multiple R-squared:  0.3086,    Adjusted R-squared:  0.3026 
+F-statistic: 50.89 on 2 and 228 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<hr style="border: 1px solid;">
+<p><br><br> <strong>geschätzte Regressionsgleichung:</strong><br>
+ati_edu = 28.37 − 0.198 ⋅ age + 0.027 ⋅ ati_soc</p>
+<p>Das hieße z. B. eine durchschnittliche Person im Alter von 50 Jahren und einem ati_soc-Wert von 20 hätte einen geschätzten ati_edu-Wert von<br>
+28.37 − 0.198 ⋅ 50 + 0.027 ⋅ 20 = 18.73</p>
+<p><strong>Interpretation:</strong></p>
+<ul>
+<li><p>Intercept (28.37):<br>
+Wenn sowohl das Alter als auch ati_soc den Wert 0 hätten (was unrealistisch ist), läge die vorhergesagte Einstellung gegenüber Inklusion bei 28.37 Punkten. In diesem Kontext ist der Achsenabschnitt also rein technisch/hypothetisch zu interpretieren.</p></li>
+<li><p>Alter (−0.19755):<br>
+Mit jedem weiteren Lebensjahr sinkt die Einstellung gegenüber Inklusion im Durchschnitt um rund 0.20 Punkte. Der negative Koeffizient weist darauf hin, dass ältere Personen tendenziell eine negativere Einstellung gegenüber Inklusion haben. Der Effekt ist signifikant.</p></li>
+<li><p>Soziale Einstellung gegenüber Inklusion (ati_soc = 0.02725):<br>
+Der geschätzte Effekt ist positiv, aber nicht signifikant (p = 0.711). Die Variable trägt also nicht signifikant zur Vorhersage bei.</p></li>
+<li><p>Modellgüte</p>
+<ul>
+<li>Varianzaufklärung (R² = 0.3086 / Adjusted R² = 0.3026):<br>
+Die Varianzaufklärung liegt weiterhin bei ca. 30.9%, vergleichbar mit Modell 1. Die zusätzliche Prädiktorvariable (ati_soc) verbessert das Modell also kaum.</li>
+<li>F-Test p-Wert &lt; 2.2e-16:<br>
+Das Gesamtmodell ist signifikant – mindestens ein Prädiktor (hier: Alter) trägt signifikant zur Vorhersage bei.</li>
+</ul></li>
+</ul>
+</section>
+<section id="forschugnsfrage-3" class="level3">
+<h3 class="anchored" data-anchor-id="forschugnsfrage-3">4.3 Forschugnsfrage 3</h3>
+<p><strong>Frage:</strong><br>
+Verändert sich die Einstellung gegenüber Inklusion bezogen auf Bildungs-Outcomes mit dem Alter in Abhängigkeit vom Geschlecht?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod3)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = ati_edu ~ age + sex, data = df)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-8.1139 -1.9601 -0.1178  2.4351  8.1400 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 28.96572    0.72790  39.793   &lt;2e-16 ***
+age         -0.20266    0.02016 -10.053   &lt;2e-16 ***
+sex         -0.31568    0.43788  -0.721    0.472    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.056 on 228 degrees of freedom
+Multiple R-squared:  0.3098,    Adjusted R-squared:  0.3037 
+F-statistic: 51.17 on 2 and 228 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<hr style="border: 1px solid;">
+<p><br><br> <strong>geschätzte Regressionsgleichung:</strong><br>
+ati_edu = 28.97 − 0.203 ⋅ age − 0.316 ⋅ sex</p>
+<p>Da es sich hierbei um eine Dummy-Regression handelt, ergibt sich folglich für<br>
+- <strong>weibliche</strong> Personen (sex = 0): ati_edu = 28.97 − 0.203 ⋅ age - <strong>männliche</strong> Personen (sex = 1): ati_edu = 28.97 − 0.203 ⋅ age − 0.316 ⋅ 1 = 28.654 − 0.203 ⋅ age</p>
+<p>Wir sehen also, dass sich der Intercept zwischen den beiden Gruppen verändert, nicht aber die Steigung.<br>
+(Weiterführend: Möchte man nun noch ein mögliches Wechselspiel zwiscehn Alter und Geschlecht mit modellieren, also dass z. B. sich das Geschlecht in unterschiedlichen Altersgruppen unterschiedlich auswirkt, müsste man noch einen Interaktionsterm mitaufnehmen. Dadurch kann auch die Steigung zwischen beiden Gruppen variieren.)</p>
+<p>Das hieße z. B. eine durchschnittliche<br>
+- <strong>weibliche</strong> Person im Alter von 50 Jahren hätte einen geschätzten ati_edu-Wert von<br>
+28.97 − 0.203 ⋅ 50 = 18.82 - <strong>männliche</strong> Person im Alter von 50 Jahren hätte einen geschätzten ati_edu-Wert von 28.654 − 0.203 ⋅ 50 = 18.504</p>
+<p><strong>Interpretation:</strong></p>
+<ul>
+<li><p>Intercept (28.97):<br>
+Die vorhergesagte Einstellung gegenüber Inklusion liegt bei 28.97 Punkten für eine Person mit Alter = 0 und sex = 0 (weiblich). In diesem Kontext ist der Achsenabschnitt also rein technisch/hypothetisch zu interpretieren.</p></li>
+<li><p>Alter (−0.20266):<br>
+Der Effekt ist nahezu identisch zu Modell 1. Mit jedem Lebensjahr sinkt die Einstellung gegenüber Inklusion im Durchschnitt um ca. 0.20 Punkte. Der Effekt ist signifikant.</p></li>
+<li><p>Geschlecht (−0.31568):<br>
+Der negative Koeffizient legt nahe, dass sex = 1 (männlich) mit einer geringfügig negativeren Einstellung verbunden ist – allerdings ist der Effekt nicht signifikant (p = 0.472).</p></li>
+<li><p>Modellgüte</p>
+<ul>
+<li>Varianzaufklärung (R² = 0.3098 / Adjusted R² = 0.3037):<br>
+Das Modell erklärt ca. 30.9% der Varianz – praktisch identisch mit Modell 1. Die zusätzliche Variable (Geschlecht) bringt keinen erkennbaren Vorteil.</li>
+<li>F-Test p-Wert &lt; 2.2e-16:<br>
+Das Gesamtmodell ist signifikant – mindestens ein Prädiktor (hier: Alter) ist bedeutsam.</li>
+</ul></li>
+</ul>
+<section id="section" class="level8">
+<p class="heading"></p>
+</section>
+</section>
+</section>
+<section id="literatur" class="level2">
 
 
 
-</main> <!-- /main -->
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Literatur</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-lueke2018attitudes" class="csl-entry" role="listitem">
+Lüke, T., &amp; Grosche, M. (2018). What do I think about inclusive education? It depends on who is asking. Experimental evidence for a social desirability bias in attitudes towards inclusion. <em>International Journal of Inclusive Education</em>, <em>22</em>(1), 38–53. <a href="https://doi.org/10.1080/13603116.2017.1348548">https://doi.org/10.1080/13603116.2017.1348548</a>
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

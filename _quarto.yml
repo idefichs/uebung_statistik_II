@@ -3,23 +3,41 @@ project:
   output-dir: docs
 
 website:
+  favicon: "images/230401_eds_Logo_farbe.ico"
   title: "Übung Statistik II"
   navbar:
-    left:
-      - href: index.qmd
-        text: Home
-      - href: about.qmd
-        text: Über
+    foreground: "#D22E4C"
+    logo: "images/230401_eds_Logo_farbe.png"
+    logo-href: "https://www.uni-regensburg.de/humanwissenschaften/educational-data-science/startseite/index.html"
+    target: _blank
+    right:
+      - text: Skript
+        menu: 
+        - href: Sitzung_1.qmd
+          text: Sitzung 1
+        - href: Sitzung_4.qmd
+          text: Sitzung 4
+      - text: Literatur
+        href: literatur.qmd
+      - text: Über
+        href: about.qmd
 
 
 format:
   html:
+    allow-html: true
     lang: de
     theme:
-      - cosmo
-      - brand
-    css: styles.css
+     # dark: darkly
+      light: flatly
+    css: styles.scss
     toc: true
+    toc-depth: 3
+    toc-title: "Inhalte"
+    toc-location: right
+    bibliography: literature.bib
+    csl: apa.csl
+    linkcolor: "#D22E4C"
 
 editor: visual
 

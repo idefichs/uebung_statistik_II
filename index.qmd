@@ -1,7 +1,13 @@
 ---
-title: "Übung Statistik II"
+title: "Herzlich willkommen ..."
 ---
 
-Willkommen zur Übung zur Vorlesung Statistik II
+... zur Übung zur Vorlesung Statistik II!
 
-In Kürze findet sich hier ein Übersicht über die behandelten Themen.
+Unter dem Reiter "Skript" finden Sie die Inhalte der einzelnen Sitzungen.; insbesondere also den verwendetet R-Code sowie Kommentare zum Code sowie zu durchgeführten statistischen Analysen.
+
+Die Seite befindet sich gerade noch im Aufbau. Deswegen werden Sie aktuell noch auf viele Lücken und schwarze Löcher stoßen. Diese sollen allerdings sukzessive befüllt werden.
+
+![](images/R_learners.png)
+*Quelle: [Artwork by allison_horst](https://twitter.com/allison_horst)*
+

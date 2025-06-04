@@ -1,6 +1,871 @@
 ---
-title: "Sitzung 4"
-author: "Jonas Hauck, Laura Simböck"
+title: "Übung zu Statistik II - Sitzung 4"
 ---
 
-\*\* Hallo Welt\*\*
+In der heutigen Sitzung beschäftigen wir uns mit einem Datensatz, der in Anlehnung an [@lueke2018attitudes] simuliert wurde. Dabei handelt es sich lediglich um eine Simulation zu Übungszwecken, die **nicht** die Originaldaten umfasst bzw. abbildet.
+
+Im Artikel wird untersucht, welche Einstellungen Studienteilnehmende gegenüber Inklusion haben und inwiefern diese durch verschiedene Einflussfaktoren bestimmt werden. Besonderes Augenmerk liegt auf dem Einfluss der wahrgenommenen Haltung der Organisation, die die Befragung durchführt. In zwei Experimenten wurde gezeigt, dass Einstellungen zur inklusiven Bildung nicht stabil sind, sondern stark vom sozialen Kontext beeinflusst werden.
+
+```{r}
+#| label: daten-einlesen-real
+#| include: false
+
+# Daten laden (nicht anzeigen)
+df <- read.csv2("C:/Users/LocalAdmin/Nextcloud/Laura_Uebergangslager/Lehre/Statistik_II_Uebung/data_inklusion.csv")
+```
+
+## 1. Forschungsfragen
+Wir wollen in der heutigen Sitzung die folgenden drei Forschungsfragen analysieren:
+
+1. Inwiefern verändert sich die Einstellung gegenüber Inklusion bezogen auf Bildungs-Outcomes (ati_edu) mit dem Alter?
+
+2. Verändert sich die Einstellung gegenüber Inklusion bezogen auf Bildungs-Outcomes (ati_edu) mit dem Alter und abhängig von der Einstellung gegenüber Inklusion bezogen auf soziale Outcomes (ati_soc)?
+
+3. Verändert sich die Einstellung gegenüber Inklusion bezogen auf Bildungs-Outcomes mit dem Alter in Abhängigkeit vom Geschlecht?
+
+## 2. Auswahl geeigneter statistischer Analyseverfahren
+1. Vorhersage *einer* metrische AV (ati_edu) durch *eine* metrische UV (age):  
+   **➔ einfache lineare Regression**
+    
+2. Vorhersage *einer* metrische AV (ati_edu) durch *mehr als eine* metrische UV (hier: age, ati_soc):  
+   **➔ multiple lineare Regression**
+  
+2. Vorhersage *einer* metrische AV (ati_edu) durch *mind. eine* metrische UV (hier: age) und *mind. eine* binär kodierte UV (hier: sex):  
+   **➔ multiple lineare Regression mit Dummycodierung**
+
+
+## 3. Vorbereitung und Durchführung der statistischen Verfahren
+
+### 3.1 Datensatz laden
+#### Variante 1
+Den Datensatz über die Angabe des vollständigen Dateipfades einlesen.
+```{r}
+#| label: daten-einlesen-fake-1
+#| eval: false
+#| warning: false
+
+# Daten einlesen
+df <- read.csv2("Hier/kompletten/Pfad/zur/Datei/data_inklusion.csv")
+```
+
+#### Variante 2
+Ein geeignetes Arbeitsverzeichnis setzen und dort den Datensatz abspeichern. Dann benötigt der Einlese-Befehl nur noch den Dateinamen.
+```{r}
+#| label: daten-einlesen-fake-2
+#| eval: false
+#| warning: false
+
+# Arbeitsverzeichnis setzen
+setwd("Hier/kompletten/Pfad/zur/Datei")
+# optional: Überprüfung des aktuellen Arbeitsverzeichnisses
+getwd()
+# Daten einlesen
+df <- read.csv2("data_inklusion.csv")
+```
+
+
+### 3.2 Überblick über den Datensatz
+Einen guten Überblick über **Inhalt**, **Struktur** und erste **deskriptive Statistiken** des Datensatzes erhält man z. B. mit den beiden Befehlen `str()` und `summary()`.
+```{r}
+#| label: ueberblick-datensatz-1
+
+str(df)
+summary(df)
+```
+```{r}
+#| label: ueberblick-datensatz-2
+#| eval: false
+
+# weitere nützliche Befehle
+head(df)
+tail(df)
+nrow(df)
+ncol(df)
+library(psych)
+describe(df) # deskriptive Statistiken: describe() aus dem package psych enthält mehr/andere Informationen als summary().
+describeBy(df, df$group) # deskriptive Statistiken: describeBy() aus dem package psych gibt Statistiken gesplittet nach Gruppen aus.
+```
+
+
+
+Wir wissen nun, **welche** Variablen im Datensatz enthalten sind, aber kennen die Kodierungen nicht. Deshalb benötigen wir noch mehr Informationen aus dem Artikel. Diese finden sich z. B. auf S. 44. Damit können wir eine Art codebook erstellen:
+
+#### **codebook**
+
+| Variable            | Beschreibung                                                      | Kodierung                                 |
+|---------------------|-------------------------------------------------------------------|-------------------------------------------|
+| `group`             | durchführende Organisation                                        | A, B, C, D (siehe Artikel)                |
+| `sex`               | Geschlecht                                                        | 0 = weiblich, 1 = männlich                |
+| `children`          | Kind(er)?                                                         | 0 = nein, 1 = ja                          |
+| `age`               | Alter                                                             | metrisch: Alter in Jahren                 |
+| `contact`           | Kontakt zu Personen mit Behinderung?                              | 0 = nein, 1 = ja                          |
+| `edu_prof`          | Beruf im Bildungsbereich?                                         | 0 = nein, 1 = ja                          |
+| `education`         | Bildungsniveau                                                    | metrisch: Anzahl der Schuljahre           |
+| `politics`          | Politische Einstellung                                            | 1 = links, 10 = rechts                    |
+| `att_org`           | Wahrgenommene Einstellung der durchführenden Organiation          | 1 = absolut gegen Inklusion bis 7 = absolut für Inklusion                  |
+| `ati_edu`           | Einstellung gegenüber Inklusion (Bildungsoutcomes)                | 0, ..., 35: Summe über 7 Items von 0 = Stimme nicht zu. bis 5 = Stimme zu. |
+| `ati_soc`           | Einstellung gegenüber Inklusion (soziale Outcomes)                | 0, ..., 25: Summe über 5 Items von 0 = Stimme nicht zu. bis 5 = Stimme zu. |
+
+
+
+### 3.3 Voraussetzungen prüfen
+1. Linearer Zusammenhang zwischen AV und allen (nicht binär kodierten) UV(s)
+2. Normalverteilung der Residuen
+3. Homoskedastizität der Residuen
+4. bei multiplen Regressionen: UVs auf Multikollinearität überprüfen
+
+Die Voraussetzungen 1 & 4 können überprüft werden, bevor die Modelle geschätzt werden. Für 2 & 3 benötigen wir die Residuen, die wir aber erst im Zuge der Schätzung der Modelle erhalten.
+
+
+
+#### 3.3.1 Überprüfung der Linearität
+Die Linearität kann **visuell**, z. B. mit Hilfe eines Streudiagramms (scatterplot) überprüft werden. Eine feststehendes Kriterium, ab wann ein Zusammenhang als linear gewertet wird, gibt es allerdings nicht.
+
+**Forschungsfrage 1:**
+
+:::: {.columns}
+::: {.column width="47.5%"}
+base R
+```{r}
+#| label: scatter-base-1
+# zur Erinnerung: ~ = "in Abhängigkeit von"
+# für Plots bedeutet das: y-Achse ~ x-Achse
+plot(ati_edu ~ age, data = df,
+     main = "ATI nach Alter",
+     xlab = "Alter",
+     ylab = "ATI (Bildungs-Outcomes)",
+     ylim = c(min(df$ati_edu)-2,32),
+     pch = 19,         # volle Punkte
+     col = "#D22E4C") # Farbe der Punkte
+```
+:::
+
+::: {.column width="5%"}
+<!-- empty column to create gap -->
+:::
+
+::: {.column width="47.5%"}
+ggplot
+```{r}
+#| label: scatter-ggplot-1
+library(ggplot2)
+ggplot(data = df, aes(x = age, y = ati_edu)) +
+  geom_point(color =  "#D22E4C") +
+  labs(
+    title = "ATI nach Alter",
+    x = "Alter",
+    y = "ATI (Bildungs-Outcomes)"
+  ) +
+  theme_minimal()
+```
+:::
+::::
+
+<hr style="border: 1px solid #D22E4C;">
+
+**Forschungsfrage 2:**
+
+:::: {.columns}
+::: {.column width="47.5%"}
+base R
+```{r}
+#| label: scatter-base-2
+# zur Erinnerung: ~ = "in Abhängigkeit von"
+# für Plots bedeutet das: y-Achse ~ x-Achse
+plot(ati_edu ~ ati_soc, data = df,
+     main = "ATI_EDU in Abhängigkeit von ATI_SOC",
+     xlab = "ATI (soziale Outcomes)",
+     ylab = "ATI (Bildungs-Outcomes)",
+     ylim = c(min(df$ati_edu)-2,32),
+     pch = 19,         # volle Punkte
+     col = "#D22E4C") # Farbe der Punkte
+```
+:::
+
+::: {.column width="5%"}
+<!-- empty column to create gap -->
+:::
+
+::: {.column width="47.5%"}
+ggplot
+```{r}
+#| label: scatter-ggplot-2
+library(ggplot2)
+ggplot(data = df, aes(x = ati_soc, y = ati_edu)) +
+  geom_point(color =  "#D22E4C") +
+  labs(
+    title = "ATI_EDU in Abhängigkeit von ATI_SOC",
+    x = "ATI (soziale Outcomes)",
+    y = "ATI (Bildungs-Outcomes)"
+  ) +
+  theme_minimal()
+```
+:::
+::::
+
+
+
+**Fazit:**  
+Für beide Forschungsfragen nehmen wir nach Inspektion der Streudiagramme lineare Zusammenhänge an. 
+
+
+#### 3.3.2 Überprüfung auf Multikollinearität
+Multikollinearität muss nur für Forschungsfrage 2 überprüft werden, weil hier mindestens zwei metrische Prädiktoren (UVs) ins Modell eingehen. Die multiple Regressionsanalyse liefert nur dann verlässliche Ergebnisse, wenn die Prädiktoren nicht zu hoch miteinander korrelieren. Ein Beispiel für hohe Kollinearität wäre etwa die größe einer Wohnung und die Anzahl der Zimmer. In diesem Fall kann man eine UV bereits durch eine (oder auch mehrere) weitere UV(s) vorhersagen, was zu Problemen in der Schätzgenauigkeit und Interpretierbarkeit des Modells führen kann.
+
+Multikollinearität kann auf zwei Arten überprüft werden:
+
+**visuell** durch z. B. ein Streudiagramm der beiden Prädiktoren
+
+:::: {.columns}
+::: {.column width="47.5%"}
+base R
+```{r}
+#| label: scatter-base-3
+# zur Erinnerung: ~ = "in Abhängigkeit von"
+# Für die Überprüfung der Kollinearität ist die Reihenfolge der UVs egal
+plot(age ~ ati_soc, data = df,
+     main = "Alter in Abhängigkeit von ATI_SOC",
+     xlab = "ATI (soziale Outcomes)",
+     ylab = "Alter",
+     ylim = c(min(df$age)-2, max(df$age)+2),
+     pch = 19,         # volle Punkte
+     col = "#D22E4C") # Farbe der Punkte
+```
+:::
+
+::: {.column width="5%"}
+<!-- empty column to create gap -->
+:::
+
+::: {.column width="47.5%"}
+ggplot
+```{r}
+#| label: scatter-ggplot-3
+library(ggplot2)
+ggplot(data = df, aes(x = ati_soc, y = age)) +
+  geom_point(color =  "#D22E4C") +
+  labs(
+    title = "Alter in Abhängigkeit von ATI_SOC",
+    x = "ATI (soziale Outcomes)",
+    y = "Alter"
+  ) +
+  theme_minimal()
+```
+:::
+::::
+
+
+
+**statistisch** durch die Berechnung der Korrelation:
+```{r}
+#| label: correlation
+cor(df$age, df$ati_soc)
+```
+Ab einer Pearson-Korrelation von ca. .70 sollte man noch einmal genau prüfen, ob Kollinearität vorliegt (z. B. auch mittels VIF [Variance Inflation Factor]) und ob beide Variablen im Regressionsmodell benötigt werden. Auch hier gilt: Faustregel, kein absoluter Schwellenwert!
+
+Bei mehr als zwei metrischen UVs ist eine Korrelationsmatrix sinnvoll. Da Multikollinearität aber auch dann vorliegen kann, wenn sich ein Prädiktor durch eine (lineare) Kombination anderer Prädiktoren vorhersagen lässt, reicht eine Korrelationsmatrix nicht immer aus. In diesem Fall ist die Verwendung des VIF empfohlen.
+
+**Fazit:**  
+In unserem Fall korrelieren die beiden Prädiktoren zwar durchaus hoch, aber noch in einem "vertretbaren Rahmen", d. h. sie könnten im Modell möglicherweise beide substanziell zur Erklärung von Varianz in der AV beitragen.
+
+
+### 3.4. Aufstellen der Modelle
+:::: {.columns}
+::: {.column width="30%"}
+```{r}
+#| label: model-1
+# zu Forschungsfrage 1
+mod1 <- lm(df$ati_edu ~ df$age)
+
+
+
+# 2D-Plot mit base R
+plot(df$ati_edu ~ df$age,
+     xlab = "Alter",
+     ylab = "ATI (Bildungs-Outcomes",
+     col = "#D22E4C",
+     pch = 16)
+
+# Regressionsgerade einzeichnen
+abline(mod1, col = "#F2CCD4", lwd = 4)
+
+```
+:::
+
+::: {.column width="2%"}
+
+:::
+
+::: {.column width="32%"}
+```{r}
+#| label: model-2
+
+# zu Forschungsfrage 2
+mod2 <- lm(ati_edu ~ age + ati_soc, data = df)
+# Je mehr Prädiktoren, desto schwieriger wird die Visualisierung des Modells.
+# Mehr als drei Dimensionen (2 Prädiktoren + 1 Kriterium) kann man sich nicht mehr vorstellen.
+
+# 3D Plot
+library(scatterplot3d)
+s3d <- scatterplot3d(df$age, df$ati_soc, df$ati_edu, pch = 16, color = "#D22E4C",
+                     xlab = "Alter", ylab = "ATI (soziale Outcomes)", zlab = "ATI (Bildungs-Outcomes")
+
+# Regressionsebene einzeichnen
+s3d$plane3d(mod2)
+
+```
+:::
+
+::: {.column width="2%"}
+
+:::
+
+::: {.column width="32%"}
+```{r}
+#| label: model-3
+
+# zu Forschungsfrage 3
+mod3 <- lm(ati_edu ~ age + sex, data = df)
+```
+:::
+::::
+
+### 3.5. Prüfung der restlichen Voraussetzungen
+
+Nachdem die Modelle geschätzt sind, können nun auch die restlichen Voraussetzungen überprüft werden, d. h. insbesondere die **Normalverteilung der Residuen** und die **Homoskedastizität der Residuen**.
+
+Hat man die Modelle geschätzt, kann man in R leicht auf die Residuen bzw. geschätzten (auch: vorhergesagten, gefitteten) Werte zugreifen:
+
+- `resid(model)` bzw `residuals(model)` liefert die Residuen des jeweiligen Modells.
+- `fitted(model)` liefert die vorhergesagten Werte, also diejenigen, die auf der Regressionsgerade liegen.
+
+Zum Beispiel für unser Modell 1:
+```{r}
+#| label: residual-fitted
+
+resid(mod1)[1:12] # Die Residuen für die ersten 12 Fälle im Datensatz
+fitted(mod1)[1:12] # Die geschätzten Werte der AV (hier: ati_edu) für die ersten 12 Fälle im Datensatz
+```
+
+#### 3.5.1 Normalverteilung der Residuen
+Damit wir nicht immer wieder die Funktion `resid()`schreiben müssen, speichern wir die Residuen zunächst jeweils in einem neuen Objekt:
+```{r}
+resid1 <- resid(mod1)
+resid2 <- resid(mod2)
+resid3 <- resid(mod3)
+```
+
+Ob die Residuen normalverteilt sind, kann wieder auf zwei Arten überprüft werden: visuell oder mit Hilfe eines statistischen Tests.
+
+**visuell**  
+
+![](images/not_normal.png){.float-right width="300"}
+*Quelle: [Artwork by allison_horst](https://twitter.com/allison_horst)*  
+
+Geeignete Visualisierungen sind u. a. Histogramme oder Q-Q-Plots.
+
+**Forschungsfrage 1:**
+
+
+:::: {.columns}
+::: {.column width="47.5%"}
+base R
+```{r}
+#| label: nd-residuals-1-base
+
+
+hist(resid1, col = "#D22E4C", breaks = 24,
+     xlim = c(-10, 10),
+     ylim = c(0,25),
+     main = "Histogramm der Residuen von Modell 1",
+     xlab = "Residuen",
+     ylab = "Häufigkeit")
+
+qqnorm(resid1, col = "#D22E4C",
+       main = "Q-Q-Plot der Residuen von Modell 1",
+       xlab = "Theoretische Quantile",
+       ylab = "Empirische Quantile",
+       pch = 16)
+qqline(resid1)
+```
+:::
+
+::: {.column width="5%"}
+<!-- empty column to create gap -->
+:::
+
+::: {.column width="47.5%"}
+ggplot
+```{r}
+#| label: nd-residuals-1-ggplot
+ggplot(data.frame(resid1), aes(x = resid1)) +
+  geom_histogram(color = "black", fill = "#D22E4C", bins = 20) +
+  labs(title = "Histogramm der Residuen von Modell 1",
+       x = "Residuen",
+       y = "Häufigkeit") +
+  theme_minimal()
+
+ggplot(data.frame(resid1), aes(sample = resid1)) +
+  stat_qq(color = "#D22E4C") +
+  stat_qq_line() +
+  labs(title = "Q-Q-Plot der Residuen von Modell 1",
+       x = "Theoretische Quantile", y = "Empirische Quantile") +
+  theme_minimal()
+```
+:::
+::::
+
+<hr style="border: 1px solid #D22E4C;">
+
+
+Mit analogem Code können nun die entsprechenden Plots für unsere Modelle 2 und 3 erzeugt werden.
+
+**Forschungsfrage 2:**
+
+:::: {.columns}
+::: {.column width="47.5%"}
+base R
+```{r}
+#| label: nd-residuals-2-base
+#| echo: false
+
+hist(resid2, col = "#D22E4C", breaks = 24,
+     xlim = c(-10, 10),
+     ylim = c(0,25),
+     main = "Histogramm der Residuen von Modell 2",
+     xlab = "Residuen",
+     ylab = "Häufigkeit")
+
+qqnorm(resid2, col = "#D22E4C",
+       main = "Q-Q-Plot der Residuen von Modell 2",
+       xlab = "Theoretische Quantile",
+       ylab = "Empirische Quantile",
+       pch = 16)
+qqline(resid2)
+```
+:::
+
+::: {.column width="5%"}
+<!-- empty column to create gap -->
+:::
+
+::: {.column width="47.5%"}
+ggplot
+```{r}
+#| label: nd-residuals-2-ggplot
+#| echo: false
+
+
+ggplot(data.frame(resid2), aes(x = resid2)) +
+  geom_histogram(color = "black", fill = "#D22E4C", bins = 30) +
+  labs(title = "Histogramm der Residuen von Modell 2",
+       x = "Residuen",
+       y = "Häufigkeit") +
+  theme_minimal()
+
+ggplot(data.frame(resid2), aes(sample = resid2)) +
+  stat_qq(color = "#D22E4C") +
+  stat_qq_line() +
+  labs(title = "Q-Q-Plot der Residuen von Modell 2", x = "Theoretische Quantile", y = "Empirische Quantile") +
+  theme_minimal()
+```
+:::
+::::
+
+<hr style="border: 1px solid #D22E4C;">
+
+**Forschungsfrage 3:**
+
+:::: {.columns}
+::: {.column width="47.5%"}
+base R
+```{r}
+#| label: nd-residuals-3-base
+#| echo: false
+
+
+hist(resid3, col = "#D22E4C", breaks = 24,
+     xlim = c(-10, 10),
+     ylim = c(0,25),
+     main = "Histogramm der Residuen von Modell 3",
+     xlab = "Residuen",
+     ylab = "Häufigkeit")
+
+qqnorm(resid3, col = "#D22E4C",
+       main = "Q-Q-Plot der Residuen von Modell 3",
+       xlab = "Theoretische Quantile",
+       ylab = "Empirische Quantile",
+       pch = 16)
+qqline(resid3)
+```
+:::
+
+::: {.column width="5%"}
+<!-- empty column to create gap -->
+:::
+
+::: {.column width="47.5%"}
+ggplot
+```{r}
+#| label: nd-residuals-3-ggplot
+#| echo: false
+
+
+ggplot(data.frame(resid3), aes(x = resid3)) +
+  geom_histogram(color = "black", fill = "#D22E4C", bins = 20) +
+  labs(title = "Histogramm der Residuen von Modell 3",
+       x = "Residuen",
+       y = "Häufigkeit") +
+  theme_minimal()
+
+ggplot(data.frame(resid3), aes(sample = resid3)) +
+  stat_qq(color = "#D22E4C") +
+  stat_qq_line() +
+  labs(title = "Q-Q-Plot der Residuen von Modell 3", x = "Theoretische Quantile", y = "Empirische Quantile") +
+  theme_minimal()
+```
+:::
+::::
+
+**Fazit:**  
+Für alle drei Modelle sind die Residuen annähernd normalverteilt. Bei Histogrammen ist immer zu beachten, dass die Argumente `bins` bzw. `breaks` das Aussehen der Verteilung beeinflussen. Daher sehen die Plots auch unterschiedlich aus, je nachdem ob base R oder ggplot verwendet wird. (Mit etwas mehr Code ist es aber auch möglich, gleiche Plots zu erzeugen.)
+Sind die Argumente ungünstig gewählt, lässt sich eine Normalverteilung u. U. nicht erkennen. Zum Beispiel ergibt sich für unser Modell 1 und unterschiedliche Werte für das Argument `bins`:
+
+::::{.columns}
+:::{.column width = "47.5%"}
+```{r}
+#| label: bins-1
+
+# bins = 10
+
+ggplot(data.frame(resid1), aes(x = resid1)) +
+  geom_histogram(color = "black", fill = "#D22E4C", bins = 10) +
+  labs(title = "Histogramm der Residuen von Modell 1",
+       x = "Residuen",
+       y = "Häufigkeit") +
+  theme_minimal()
+```
+:::
+
+::: {.column width="5%"}
+<!-- empty column to create gap -->
+:::
+
+::: {.column width="47.5%"}
+```{r}
+#| label: bins-2
+
+# bins = 30
+
+ggplot(data.frame(resid1), aes(x = resid1)) +
+  geom_histogram(color = "black", fill = "#D22E4C", bins = 30) +
+  labs(title = "Histogramm der Residuen von Modell 1",
+       x = "Residuen",
+       y = "Häufigkeit") +
+  theme_minimal()
+```
+:::
+::::
+
+
+
+**Q-Q-Plots** sind dahingehend eine etwas **verlässlichere Visualisierungsmöglichkeit**. Die Punkte sollten hierbei möglichst auf der eingezeichneten Geraden liegen. An den beiden "Enden" der Geraden gibt es fast immer Abweichungen, weil in diesen Bereichen nur wenige Datenpunkte vorliegen, was die Quantilschätzungen unsicherer macht, sie besonders empfindlich gegenüber Ausreißern sind und sich Unterschiede zwischen der beobachteten und der theoretischen Verteilung vor allem in den Randbereichen deutlich bemerkbar machen.
+
+
+<hr style="border: 1px solid;">
+
+**statistisch:**
+Geeignete statistische Tests sind u. a. der Shapiro-Wilk-Test oder der Kolmogorov-Smirnov-Test.
+Exemplarisch für unser Modell 1:
+
+::::{.columns}
+:::{.column width = "47.5%"}
+Shapiro-Wilk-Test
+```{r}
+#| label: shapiro
+shapiro.test(resid1)
+```
+:::
+
+::: {.column width="5%"}
+<!-- empty column to create gap -->
+:::
+
+:::{.column width = "47.5%"}
+Kolmogorov-Smirnov-Test
+```{r}
+#| label: kolmogorov
+
+
+ks.test(resid1, "pnorm", mean=mean(resid1), sd=sd(resid1))
+```
+:::
+::::
+<hr style="border: 1px solid;">
+
+Während der Shapiro-Wilk-Test immer auf Normalverteilung testet, testet der Kolmogorov-Smirnov-Test grundsätzlich auf Verteilungen und benötigt nähere Angaben, auf welche Verteilung nun genau getestet werden soll. In unserem Fall ist das die Normalverteilung, die durch den Mittelwert und die Standardabweichung festgelegt ist. Deshalb werden diese beiden Parameter ebenfalls als Argumente übergeben.
+
+
+Beide Tests haben die Nullhypothese "Normalverteilung liegt vor". Wird der Test signifikant, würde man also die Nullhypothese ablehnen. Wäre das der Fall, wäre die Voraussetzung der normalverteilten Residuen verletzt.
+
+**Fazit:**  
+In unserem Fall werden beide Tests nicht signifikant, wir gehen also von Normalverteilung aus. Grundsätzlich empfiehlt sich immer auch die visuelle Überprüfung, da beide Tests (unterschiedliche) Schwachstellen besitzen und in bestimmten Fällen (z. B. Ausreißer) die Normalverteilung zu schnell "ablehnen" und in anderen Fällen (z. B. zu geringe Power bei kleinen Stichproben) eine Abweichung der Normalverteilung möglicherweise nicht erkennen.
+
+
+
+#### 3.5.2 Homoskedaszität der Residuen überprüfen
+
+Homoskedastizität kann ebenfalls gut **visuell** überprüft werden.
+Ein geeignetes Mittel ist der sog. Residual-vs-Fitted-Plot.  
+Bei **Homoskedastizität** sollte kein Muster erkennbar sein, d. h. die Punkte sollten zufällig um die Nulllinie streuen, ohne z. B. einem Trichter zu ähneln.
+
+**Forschungsfrage 1:**
+
+:::: {.columns}
+::: {.column width="47.5%"}
+base R
+```{r}
+#| label: homoskedasticity-1-base
+
+plot(fitted(mod1), resid1,
+     col = "#D22E4C",
+     pch = 16,
+     main = "Residuals vs Fitted – Modell 1",
+     xlab = "Vorhergesagte Werte",
+     ylab = "Residuen")
+abline(h = 0, col = "black", lwd = 3)
+
+```
+:::
+
+::: {.column width="5%"}
+<!-- empty column to create gap -->
+:::
+
+::: {.column width="47.5%"}
+ggplot
+```{r}
+#| label: homoskedasticity-1-ggplot
+
+ggplot(data.frame(fitted = fitted(mod1), resid = resid1),
+       aes(x = fitted, y = resid)) +
+  geom_point(color = "#D22E4C") +
+  geom_hline(yintercept = 0, linetype = "solid") +
+  labs(title = "Residuals vs Fitted – Modell 1",
+       x = "Vorhergesagte Werte",
+       y = "Residuen") +
+  theme_minimal()
+```
+:::
+::::
+
+<hr style="border: 1px solid #D22E4C;">
+
+
+Mit analogem Code können nun die entsprechenden Plots für unsere Modelle 2 und 3 erzeugt werden.
+
+**Forschungsfrage 2:**
+
+:::: {.columns}
+::: {.column width="47.5%"}
+base R
+```{r}
+#| label: homoskedasticity-2-base
+#| echo: false
+
+plot(fitted(mod2), resid2,
+     col = "#D22E4C",
+     pch = 16,
+     main = "Residuals vs Fitted – Modell 2",
+     xlab = "Vorhergesagte Werte",
+     ylab = "Residuen")
+abline(h = 0, col = "black", lwd = 3)
+```
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="47.5%"}
+ggplot
+```{r}
+#| label: homoskedasticity-2-ggplot
+#| echo: false
+#| 
+ggplot(data.frame(fitted = fitted(mod2), resid = resid2),
+       aes(x = fitted, y = resid)) +
+  geom_point(color = "#D22E4C") +
+  geom_hline(yintercept = 0, linetype = "solid") +
+  labs(title = "Residuals vs Fitted – Modell 2",
+       x = "Vorhergesagte Werte",
+       y = "Residuen") +
+  theme_minimal()
+```
+:::
+::::
+
+**Forschungsfrage 3:**
+
+:::: {.columns}
+::: {.column width="47.5%"}
+base R
+```{r}
+#| label: homoskedasticity-3-base
+#| echo: false
+
+plot(fitted(mod3), resid3,
+     col = "#D22E4C",
+     pch = 16,
+     main = "Residuals vs Fitted – Modell 3",
+     xlab = "Vorhergesagte Werte",
+     ylab = "Residuen")
+abline(h = 0, col = "black", lwd = 3)
+```
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="47.5%"}
+ggplot
+```{r}
+#| label: homoskedasticity-3-ggplot
+#| echo: false
+
+ggplot(data.frame(fitted = fitted(mod3), resid = resid2),
+       aes(x = fitted, y = resid)) +
+  geom_point(color = "#D22E4C") +
+  geom_hline(yintercept = 0, linetype = "solid") +
+  labs(title = "Residuals vs Fitted – Modell 3",
+       x = "Vorhergesagte Werte",
+       y = "Residuen") +
+  theme_minimal()
+```
+:::
+::::
+
+**Fazit:**  
+Die graphische Überprüfung deutet auf Homoskedastizität hin. Es sind keine auffälligen Muster zu erkennen.
+
+Da wir nun also alle notwendigen Voraussetzungen überprüft haben und diese jeweils für alle drei Modelle erfüllt sind, können wir diese nun auch sinnvollerweise interpretieren.
+
+
+## 4. Interpretation
+Um die zur Interpretation nötigen Informationen (Parameterschätzungen, p-Werte, ...) zu erhalten, nutzen wir die Funktion `summary()`.
+
+### 4.1 Forschungsfrage 1
+**Frage:**  
+Inwiefern verändert sich die Einstellung gegenüber Inklusion bezogen auf Bildungs-Outcomes (ati_edu) mit dem Alter?
+
+```{r}
+#| label: interpretation-1
+summary(mod1)
+```
+<hr style="border: 1px solid;">
+<br><br>
+**geschätzte Regressionsgleichung:**  
+ati_edu = 28.89 − 0.203 ⋅ age
+
+Das hieße z. B. eine durchschnittliche Person im Alter von 50 Jahren hätte einen geschätzten ati_edu-Wert von  
+28.89 - 0.203 ⋅ 50 = 18.74
+
+
+**Interpretation:**  
+
+- Intercept (28.89):  
+    Wenn das Alter 0 wäre (was inhaltlich hier keinen realistischen Sinn ergibt), wäre die vorhergesagte Einstellung gegenüber Inklusion 28.89 Punkte. 
+    In diesem Kontext ist der Achsenabschnitt also rein technisch/hypothetisch zu interpretieren.
+
+- Alter (−0.20324):  
+    Mit jedem weiteren Lebensjahr sinkt die Einstellung gegenüber Inklusion im Durchschnitt um 0.20 Punkte. Der negative Koeffizient weist darauf hin, dass ältere Personen tendenziell eine negativere Einstellung gegenüber Inklusion haben. Der Effekt ist signifikant.
+  
+- Modellgüte
+  - Varianzaufklärung (R² = 0.3082 / Adjusted R² = 0.3052):  
+      Das Modell erklärt ca. **30.8%** der Varianz in der Einstellung gegenüber Inklusion. Für sozialwissenschaftliche Modelle ist das ein mittlerer Effekt.
+  - F-Test p-Wert < 2.2e-16:  
+      Das Gesamtmodell ist signifikant. Die Prädiktorvariable "Alter" trägt also statistisch signifikant zur Vorhersage bei.
+  
+  
+
+### 4.2 Forschugnsfrage 2
+**Frage:**  
+Verändert sich die Einstellung gegenüber Inklusion bezogen auf Bildungs-Outcomes (ati_edu) mit dem Alter und abhängig von der Einstellung gegenüber Inklusion bezogen auf soziale Outcomes (ati_soc)?
+
+```{r}
+#| label: interpretation-2
+summary(mod2)
+```
+<hr style="border: 1px solid;">
+<br><br>
+**geschätzte Regressionsgleichung:**  
+ati_edu = 28.37 − 0.198 ⋅ age + 0.027 ⋅ ati_soc
+
+Das hieße z. B. eine durchschnittliche Person im Alter von 50 Jahren und einem ati_soc-Wert von 20 hätte einen geschätzten ati_edu-Wert von  
+28.37 − 0.198 ⋅ 50 + 0.027 ⋅ 20 = 18.73
+
+
+**Interpretation:**  
+
+- Intercept (28.37):  
+    Wenn sowohl das Alter als auch ati_soc den Wert 0 hätten (was unrealistisch ist), läge die vorhergesagte Einstellung gegenüber Inklusion bei 28.37 Punkten. 
+    In diesem Kontext ist der Achsenabschnitt also rein technisch/hypothetisch zu interpretieren.
+
+- Alter (−0.19755):  
+    Mit jedem weiteren Lebensjahr sinkt die Einstellung gegenüber Inklusion im Durchschnitt um rund 0.20 Punkte. Der negative Koeffizient weist darauf hin, dass ältere Personen tendenziell eine negativere Einstellung gegenüber Inklusion haben. Der Effekt ist signifikant.
+    
+- Soziale Einstellung gegenüber Inklusion (ati_soc = 0.02725):  
+  Der geschätzte Effekt ist positiv, aber nicht signifikant (p = 0.711). Die Variable trägt also nicht signifikant zur Vorhersage bei.
+  
+- Modellgüte
+  - Varianzaufklärung (R² = 0.3086 / Adjusted R² = 0.3026):  
+      Die Varianzaufklärung liegt weiterhin bei ca. 30.9%, vergleichbar mit Modell 1. Die zusätzliche Prädiktorvariable (ati_soc) verbessert das Modell also kaum.
+  - F-Test p-Wert < 2.2e-16:  
+      Das Gesamtmodell ist signifikant – mindestens ein Prädiktor (hier: Alter) trägt signifikant zur Vorhersage bei.
+
+### 4.3 Forschugnsfrage 3
+**Frage:**  
+Verändert sich die Einstellung gegenüber Inklusion bezogen auf Bildungs-Outcomes mit dem Alter in Abhängigkeit vom Geschlecht?
+
+```{r}
+#| label: interpretation-3
+summary(mod3)
+```
+<hr style="border: 1px solid;">
+<br><br>
+**geschätzte Regressionsgleichung:**  
+ati_edu = 28.97 − 0.203 ⋅ age − 0.316 ⋅ sex
+
+Da es sich hierbei um eine Dummy-Regression handelt, ergibt sich folglich für  
+- **weibliche** Personen (sex = 0): ati_edu = 28.97 − 0.203 ⋅ age
+- **männliche** Personen (sex = 1): ati_edu = 28.97 − 0.203 ⋅ age − 0.316 ⋅ 1 = 28.654 − 0.203 ⋅ age
+
+Wir sehen also, dass sich der Intercept zwischen den beiden Gruppen verändert, nicht aber die Steigung.  
+(Weiterführend: Möchte man nun noch ein mögliches Wechselspiel zwiscehn Alter und Geschlecht mit modellieren, also dass z. B. sich das Geschlecht in unterschiedlichen Altersgruppen unterschiedlich auswirkt, müsste man noch einen Interaktionsterm mitaufnehmen. Dadurch kann auch die Steigung zwischen beiden Gruppen variieren.)
+
+Das hieße z. B. eine durchschnittliche  
+- **weibliche** Person im Alter von 50 Jahren hätte einen geschätzten ati_edu-Wert von  
+  28.97 − 0.203 ⋅ 50 = 18.82
+- **männliche** Person im Alter von 50 Jahren hätte einen geschätzten ati_edu-Wert von 
+   28.654 − 0.203 ⋅ 50 = 18.504
+
+
+**Interpretation:**  
+
+- Intercept (28.97):  
+    Die vorhergesagte Einstellung gegenüber Inklusion liegt bei 28.97 Punkten für eine Person mit Alter = 0 und sex = 0 (weiblich).
+    In diesem Kontext ist der Achsenabschnitt also rein technisch/hypothetisch zu interpretieren.
+
+- Alter (−0.20266):  
+    Der Effekt ist nahezu identisch zu Modell 1. Mit jedem Lebensjahr sinkt die Einstellung gegenüber Inklusion im Durchschnitt um ca. 0.20 Punkte. Der Effekt ist signifikant.
+
+- Geschlecht (−0.31568):  
+    Der negative Koeffizient legt nahe, dass sex = 1 (männlich) mit einer geringfügig negativeren Einstellung verbunden ist – allerdings ist der Effekt nicht signifikant (p = 0.472).
+  
+- Modellgüte
+  - Varianzaufklärung (R² = 0.3098 / Adjusted R² = 0.3037):  
+      Das Modell erklärt ca. 30.9% der Varianz – praktisch identisch mit Modell 1. Die zusätzliche Variable (Geschlecht) bringt keinen erkennbaren Vorteil.
+  - F-Test p-Wert < 2.2e-16:  
+      Das Gesamtmodell ist signifikant – mindestens ein Prädiktor (hier: Alter) ist bedeutsam.
+      
+########
+## Literatur

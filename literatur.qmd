@@ -1,0 +1,9 @@
+---
+title: "Literatur"
+---
+
+In Kürze werden hier einige Bücher und Websites aufgeführt, die bei der Beschäftigung mit Statistik, R und vor allem der Kombination aus beidem hilfreich sind.
+
+Folgende Titel für Statistik:
+
+Folgende für das Arbeiten mit R:
