@@ -30,7 +30,6 @@ format:
     theme:
      # dark: darkly
       light: flatly
-    css: styles.scss
     toc: true
     toc-depth: 3
     toc-title: "Inhalte"
@@ -38,6 +37,7 @@ format:
     bibliography: literature.bib
     csl: apa.csl
     linkcolor: "#D22E4C"
+    css: styles.scss
 
 editor: visual
 
