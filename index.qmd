@@ -4,7 +4,7 @@ title: "Herzlich willkommen ..."
 
 ... zur Übung zur Vorlesung Statistik II!
 
-Unter dem Reiter "Skript" finden Sie die Inhalte der einzelnen Sitzungen.; insbesondere also den verwendetet R-Code sowie Kommentare zum Code sowie zu durchgeführten statistischen Analysen.
+Unter dem Reiter "Skript" finden Sie die Inhalte der einzelnen Sitzungen; insbesondere also den verwendetet R-Code sowie Kommentare zum Code sowie zu durchgeführten statistischen Analysen.
 
 Die Seite befindet sich gerade noch im Aufbau. Deswegen werden Sie aktuell noch auf viele Lücken und schwarze Löcher stoßen. Diese sollen allerdings sukzessive befüllt werden.
 
