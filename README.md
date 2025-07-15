@@ -1,1 +1,1 @@
-Hier geht es zur Website vom Kurs: https://idefichs.github.io/uebung_statistik_II/
+Hier geht es zur Website vom Kurs: <https://idefichs.github.io/uebung_statistik_II/>

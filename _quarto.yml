@@ -1,6 +1,8 @@
 project:
   type: website
   output-dir: docs
+  resources:
+    - loesung_teil1.html
 
 website:
   favicon: "images/230401_eds_Logo_farbe.ico"
@@ -17,6 +19,8 @@ website:
           text: Sitzung 1
         - href: Sitzung_4.qmd
           text: Sitzung 4
+        - href: loesung_teil1.thml
+          text: Lösungen
       - text: Literatur
         href: literatur.qmd
       - text: Über
@@ -38,6 +42,7 @@ format:
     csl: apa.csl
     linkcolor: "#D22E4C"
     css: styles.css
+    embed-resources: true
 
 editor: visual
 
