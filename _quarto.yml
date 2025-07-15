@@ -19,7 +19,7 @@ website:
           text: Sitzung 1
         - href: Sitzung_4.qmd
           text: Sitzung 4
-        - href: loesung_teil1.thml
+        - href: loesung_teil1.html
           text: Lösungen
       - text: Literatur
         href: literatur.qmd
