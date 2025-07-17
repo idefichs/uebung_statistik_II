@@ -1,0 +1,208 @@
+---
+title: "Lösungen: Statistische Tests in R"
+author: "Euer Team der Statistik II Übung"
+---
+
+::: {.callout-note title="Hinweis"}
+Die Frage 1.8 (unter t-Tests) war noch fälschlicherweise im Übungsblatt. Die Interpretation ist bereits mit Frage 1.6 abgedeckt.
+:::
+
+<h1>Teil 1 <small class="text-body-secondary">Programmierteil in R</small></h1>
+
+Hier werden alle notwendigen Bibliotheken geladen.
+
+```{r}
+#| output: false
+library(car)
+```
+
+<h2>Aufgabe 1.1 <small class="text-body-secondary">Einlesen des Datensatzes</small></h2>
+
+Mit diesem Befehl laden wir den Datensatz. Wichtig ist, das wir im richtigen Arbeitsverzeichnis sind. Das geht mit `setwd("hier kommt der Pfad rein")`
+
+```{r setup}
+#| eval: false
+#| warning: false
+load("digitales_lernen.RData")
+```
+
+```{r}
+#| label: daten-einlesen-real
+#| include: false
+
+# Daten laden (nicht anzeigen)
+load("C:/Users/LocalAdmin/Nextcloud/Laura_Uebergangslager/Lehre/Statistik_II_Uebung/digitales_lernen.RData")
+```
+<h2>Aufgabe 1.2 <small class="text-body-secondary">Überblick über den Datensatz</small></h2>
+
+```{r}
+head(df)
+summary(df)
+```
+
+Interpretation:
+
+-   Der Datensatz enthält 100 Beobachtungen (Studierende) mit 8 Variablen
+-   Klausurnoten liegen zwischen 49 und 86 Punkten (Mittelwert: 64.98)
+-   49 Studierende lernten digital, 51 traditionell
+
+<h2>Aufgabe 1.3 <small class="text-body-secondary">Geschlechterverteilung und Klausurnoten</small></h2>
+
+```{r}
+table(df$geschlecht)
+
+# Mittlere Punkte in der Abschlussklausur der Männer
+mean(df$klausurnote[df$geschlecht == "männlich"])
+
+# Mittlere Punkte in der Abschlussklausur der Frauen
+mean(df$klausurnote[df$geschlecht == "weiblich"])
+```
+
+Die Geschlechterverteilung ist relativ ausgeglichen (45 männlich, 55 weiblich) und die mittleren Punktezahlen vergleichbar.
+
+Hier noch eine kürzere alternative Variante zur Berechnung der Mittelwerte:
+
+```{r}
+aggregate(klausurnote ~ geschlecht, data = df, FUN = mean)
+```
+
+<h2>Aufgabe 1.4 <small class="text-body-secondary">Normalverteilung</small></h2>
+
+```{r}
+qqnorm(df$klausurnote[df$lernmethode == "digital"])
+qqline(df$klausurnote[df$lernmethode == "digital"])
+
+qqnorm(df$klausurnote[df$lernmethode == "traditionell"])
+qqline(df$klausurnote[df$lernmethode == "traditionell"])
+
+shapiro.test(df$klausurnote[df$lernmethode == "digital"])
+shapiro.test(df$klausurnote[df$lernmethode == "traditionell"])
+```
+
+**Interpretation der Normalverteilungsprüfung:**
+
+-   Q-Q-Plots: Die Punkte liegen größtenteils auf oder nahe der Geraden → Hinweis auf Normalverteilung
+-   Shapiro-Wilk-Tests: Digital: p = 0.373 \> 0.05 → H₀ (Normalverteilung) nicht verworfen
+-   Shapiro-Wilk-Tests: Traditionell: p = 0.870 \> 0.05 → H₀ (Normalverteilung) nicht verworfen
+-   Fazit: Die Normalverteilungsannahme ist für beide Gruppen erfüllt → t-Test ist angemessen
+
+<h2>Aufgabe 1.5 <small class="text-body-secondary">Varianzhomogenität</small></h2>
+
+```{r}
+leveneTest(klausurnote ~ lernmethode, data = df)
+```
+
+**Interpretation des Levene Tests:** p = 0.894 \> 0.05 → H₀ (Normalverteilung) wird nicht verworfen. Es kann also Varianzhomogenität angenommen werden.
+
+<h2>Aufgabe 1.6 <small class="text-body-secondary">t-Test</small></h2>
+
+```{r}
+t.test(klausurnote ~ lernmethode, data = df, var.equal = TRUE, alternative = "greater")
+```
+
+**Interpretation des t-Tests:** Die digitale Lernmethode ist der traditionellen Methode **signifikant überlegen** (68,49 vs. 61,61 Punkte).
+
+<h2>Aufgabe 1.7 <small class="text-body-secondary">t-Verteilung visualisieren</small></h2>
+
+Die Visualisierung solltet ihr am besten auf einem Blatt machen. Ziel der Aufagbe ist es nicht es per Code zu visualisieren.
+
+```{r}
+#| echo: false
+library(ggplot2)
+alpha <- 0.05
+df_t <- 98
+t_crit <- qt(1 - alpha, df = df_t)
+t_emp <- 5.1259
+
+x <- seq(-6, 6, length = 200)
+y <- dt(x, df = df_t)
+
+ggplot(data.frame(x, y), aes(x, y)) +
+  geom_line() +
+  geom_area(data = subset(data.frame(x, y), x > t_crit), aes(x = x, y = y), fill = "pink", alpha = 0.5) +
+  geom_vline(xintercept = t_crit, color = "red", linetype = "dashed") +
+  geom_vline(xintercept = t_emp, color = "blue", linewidth = .5) +
+  labs(x = "t-Wert", y = "Dichte") +
+  theme_minimal()
+```
+
+**Interpretation der Visualisierung:**
+
+-   **Rote gestrichelte Linie**: Kritischer t-Wert (t_krit ≈ 1.66) bei α = 0.05
+-   **Rosa schattierter Bereich**: Ablehnungsbereich der Nullhypothese (5% der Fläche)
+-   **Blaue Linie**: Empirischer t-Wert (t_emp = 5.126)
+
+Der **empirische t-Wert liegt weit im Ablehnungsbereich** → Die Wahrscheinlichkeit, diesen oder einen extremeren Wert unter H₀ zu beobachten, ist **extrem gering** (\< 0.001%). Dies bestätigt die **Ablehnung der Nullhypothese**.
+
+<h2>Aufgabe 1.8 <small class="text-body-secondary">ANOVA</small></h2>
+
+```{r}
+anova_model <- aov(motivation_nach ~ lernmethode * vorwissen, data = df)
+summary(anova_model)
+```
+
+**Interpretation der zweifaktoriellen ANOVA:**
+
+-   **Lernmethode (F = 23.329, p \< 0.001):** Es gibt einen signifikanten Haupteffekt der Lernmethode auf die Motivation nach der Intervention. Traditionelle und digitale Lernmethoden unterscheiden sich systematisch in ihrer Wirkung auf die Motivation.
+-   **Vorwissen (F = 30.189, p \< 0.001):** Der Haupteffekt des Vorwissens ist ebenfalls signifikant. Studierende mit niedrigem und hohem Vorwissen unterscheiden sich in ihrer Motivation nach der Intervention.
+-   **Lernmethode × Vorwissen (F = 1.177, p = 0.281):** Die Interaktion ist nicht signifikant. Die Wirkung der Lernmethoden auf die Motivation ist unabhängig vom Vorwissensstand der Studierenden.
+
+Sowohl die Lernmethode als auch das Vorwissen beeinflussen die Motivation nach der Intervention. Da keine Interaktion vorliegt, wirken beide Faktoren unabhängig voneinander.
+
+<h2>Aufgabe 1.9 <small class="text-body-secondary">Interaktionsplot</small></h2>
+
+```{r}
+interaction.plot(df$vorwissen, df$lernmethode, df$motivation_nach)
+```
+
+```{r}
+interaction.plot(df$lernmethode, df$vorwissen, df$motivation_nach)
+```
+
+**Interpretation des Interaktionsplots:** Es liegt eine **ordinale Interaktion** vor: Die beiden Linien verlaufen **nicht parallel**, schneiden sich jedoch **nicht**.
+
+<h2>Aufgabe 1.10 <small class="text-body-secondary">Voraussetzungen der Regression</small></h2>
+
+```{r}
+plot(df$klausurnote, df$lernzeit_gesamt)
+```
+
+```{r}
+plot(df$klausurnote, df$motivation_vor)
+```
+
+**Interpretation der Linearitätsprüfung:** Es sind keine starken Abweichungen in Form z. B. einer quadratischen Funktion zu erkennen. Es kann somit von einem **linearen Zusammenhang ausgegangen werden** (auch wenn er vielleicht keinen Einfluss hat).
+
+<h2>Aufgabe 1.11 <small class="text-body-secondary">Multiple lineare Regression</small></h2>
+
+```{r}
+model <- lm(klausurnote ~ lernzeit_gesamt + motivation_vor + geschlecht, data = df)
+summary(model)
+```
+
+**Interpretation des Regressionsmodells:**
+
+-   **Intercept**: Eine männliche Person mit einem Wert von 0 für `lernzeit_gesamt` und `motivation_vor` hat im Mittel einen Wert von 49,8 in der Klausur. Je nachdem, wie diese beiden Variablen gemessen wurden, kann dies eine sinnvolle Aussage sein, muss es aber nicht.
+-   **Lernzeit_gesamt**: b *(unstandardisierte Steigung)* = 0.307, p \< 0.001 → **signifikant**: Pro zusätzliche Stunde Lernzeit steigt die Klausurnote im Mittel um **0.31 Punkte**
+-   Die anderen Effekte sind nicht signifikant.
+-   **R² = 0.3597** → Das Modell erklärt **36% der Varianz** in den Klausurnoten
+
+<h2>Aufgabe 1.12 <small class="text-body-secondary">Vorhersage</small></h2>
+
+```{r}
+49.80097 + 50 * 0.30690 + 7 * 0.93852 + 1 * 0.28568
+```
+
+Für eine **weibliche** Studentin mit:
+
+-   **50 Stunden** Lernzeit
+-   **Motivation 7** (vor der Intervention)
+
+**Vorhergesagte Klausurnote: 72.0 Punkte**
+
+**Aufschlüsselung der Beiträge:**
+
+-   **Intercept** (Grundwert): 49.8 Punkte
+-   **Lernzeit-Effekt**: 50 × 0.31 = 15.3 Punkte
+-   **Motivations-Effekt**: 7 × 0.94 = 6.6 Punkte\
+-   **Geschlechts-Effekt**: 1 × 0.29 = 0.3 Punkte

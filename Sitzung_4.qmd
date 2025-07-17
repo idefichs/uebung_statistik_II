@@ -835,7 +835,8 @@ summary(mod3)
 **geschätzte Regressionsgleichung:**  
 ati_edu = 28.97 − 0.203 ⋅ age − 0.316 ⋅ sex
 
-Da es sich hierbei um eine Dummy-Regression handelt, ergibt sich folglich für  
+Da es sich hierbei um eine Dummy-Regression handelt, ergibt sich folglich für 
+
 - **weibliche** Personen (sex = 0): ati_edu = 28.97 − 0.203 ⋅ age
 
 - **männliche** Personen (sex = 1): ati_edu = 28.97 − 0.203 ⋅ age − 0.316 ⋅ 1 = 28.654 − 0.203 ⋅ age
@@ -844,6 +845,7 @@ Wir sehen also, dass sich der Intercept zwischen den beiden Gruppen verändert, 
 (Weiterführend: Möchte man nun noch ein mögliches Wechselspiel zwischen Alter und Geschlecht mit modellieren, also dass z. B. sich das Geschlecht in unterschiedlichen Altersgruppen unterschiedlich auswirkt, müsste man noch einen Interaktionsterm mitaufnehmen. Dadurch kann auch die Steigung zwischen beiden Gruppen variieren.)
 
 Das hieße z. B. eine durchschnittliche  
+
 - **weibliche** Person im Alter von 50 Jahren hätte einen geschätzten ati_edu-Wert von  
   28.97 − 0.203 ⋅ 50 = 18.82
   

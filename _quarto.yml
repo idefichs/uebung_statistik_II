@@ -1,8 +1,6 @@
 project:
   type: website
   output-dir: docs
-  resources:
-    - loesung_teil1.html
 
 website:
   favicon: "images/230401_eds_Logo_farbe.ico"
@@ -19,7 +17,7 @@ website:
           text: Sitzung 1
         - href: Sitzung_4.qmd
           text: Sitzung 4
-        - href: loesung_teil1.html
+        - href: loesung_teil1.qmd
           text: Lösungen
       - text: Literatur
         href: literatur.qmd
